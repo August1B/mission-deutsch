@@ -152,6 +152,12 @@ button{cursor:pointer;border:0;background:none}
 .tipbtn .ic{width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:26px;line-height:1;position:relative}
 .tipbtn.new .ic::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:3px solid var(--lime);animation:ring 1.6s infinite}
 @keyframes ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.5);opacity:0}}
+
+.tiphide{position:fixed;z-index:41;width:30px;height:30px;border-radius:50%;background:var(--card);color:var(--ink);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;right:max(8px,env(safe-area-inset-right,0px));bottom:calc(62px + env(safe-area-inset-bottom,0px));box-shadow:0 4px 12px rgba(18,18,18,.2);transition:bottom .25s}
+.tiphide.raised{bottom:calc(138px + env(safe-area-inset-bottom,0px))}
+.tiptab{position:fixed;z-index:40;right:0;top:46%;width:34px;height:64px;border-radius:16px 0 0 16px;background:var(--ink);color:var(--lime);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:26px;box-shadow:0 6px 18px rgba(18,18,18,.25);padding-right:env(safe-area-inset-right,0px);animation:slidein .25s}
+@keyframes slidein{from{transform:translateX(100%)}to{transform:none}}
+.toast{position:fixed;z-index:80;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);border-radius:999px;padding:12px 18px;font-weight:700;font-size:14px;max-width:calc(100% - 32px);text-align:center;animation:fade .2s}
 .app.has-cta{padding-bottom:28px}
 .tipbtn.raised{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 .scrim{position:fixed;inset:0;z-index:70;background:rgba(18,18,18,.45);display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
@@ -524,14 +530,25 @@ var tipKey = "hub";
 var tipBtn = document.createElement("button");
 tipBtn.className = "tipbtn"; tipBtn.type = "button"; tipBtn.setAttribute("aria-haspopup", "dialog");
 tipBtn.innerHTML = '<span class="ic" aria-hidden="true">?</span><span>Tipps</span>';
-document.body.appendChild(tipBtn);
+var tipHide = document.createElement("button");
+tipHide.className = "tiphide"; tipHide.type = "button"; tipHide.setAttribute("aria-label", "Tipps-Knopf ausblenden");
+tipHide.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+var tipTab = document.createElement("button");
+tipTab.className = "tiptab"; tipTab.type = "button"; tipTab.setAttribute("aria-label", "Tipps-Knopf wieder anzeigen");
+tipTab.textContent = "?";
+document.body.appendChild(tipBtn); document.body.appendChild(tipHide); document.body.appendChild(tipTab);
 tipBtn.onclick = function(){ openTips(); };
+function toast(msg){ var t = document.createElement("div"); t.className = "toast"; t.setAttribute("role", "status"); t.textContent = msg; document.body.appendChild(t); setTimeout(function(){ t.remove(); }, 2600); }
+function applyTipVis(){ var h = !!S.tipsHidden; tipBtn.hidden = h; tipHide.hidden = h; tipTab.hidden = !h; }
+tipHide.onclick = function(){ S.tipsHidden = true; save(); applyTipVis(); buzz(10); toast("Tipps ausgeblendet. Der Knopf „?“ rechts holt sie zurück."); tipTab.focus(); };
+tipTab.onclick = function(){ S.tipsHidden = false; save(); applyTipVis(); buzz(10); tipBtn.focus(); };
+applyTipVis();
 function setTips(key){
   tipKey = key;
   S.seenTips = S.seenTips || {};
   tipBtn.classList.toggle("new", !S.seenTips[key]);
   tipBtn.setAttribute("aria-label", "Tipps: " + TIPS[key].t);
-  var hasCta = !!app.querySelector(".sticky-cta"); app.classList.toggle("has-cta", hasCta); tipBtn.classList.toggle("raised", hasCta); requestAnimationFrame(function(){ var c = !!app.querySelector(".sticky-cta"); app.classList.toggle("has-cta", c); tipBtn.classList.toggle("raised", c); });
+  var hasCta = !!app.querySelector(".sticky-cta"); app.classList.toggle("has-cta", hasCta); tipBtn.classList.toggle("raised", hasCta); tipHide.classList.toggle("raised", hasCta); requestAnimationFrame(function(){ var c = !!app.querySelector(".sticky-cta"); app.classList.toggle("has-cta", c); tipBtn.classList.toggle("raised", c); tipHide.classList.toggle("raised", c); });
 }
 function tipLang(){ return S.tipLang === "fr" ? "fr" : "de"; }
 function tipsHTML(){
