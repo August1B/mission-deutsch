@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F2F2EF">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+<title>Mission Deutsch App</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: one-column phone app, Pop agency world of the deck: paper ground, rounded white cards, tilted keyword pills, lime = gain, orange = trap. Single committed light look. */
+:root{
+  --ink:#121212; --paper:#F2F2EF; --card:#FFFFFF; --lime:#C6F432; --orange:#FF6B1A; --muted:#5E5E57; --line:#DADAD3; --ink-soft:#2A2A27;
+  --display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --body:'DM Sans',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --r-xl:28px; --r-lg:22px; --r-md:16px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.4;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.app{max-width:480px;margin:0 auto;min-height:100%;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 100px;display:flex;flex-direction:column}
+.view{display:flex;flex-direction:column;gap:14px;flex:1;animation:in .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:.001;transform:translateY(10px)}to{opacity:1;transform:none}}
+.d{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.86;letter-spacing:.2px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:7px 13px;font-size:11.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;background:var(--ink);color:var(--lime);white-space:nowrap}
+.tilt{display:inline-block;border-radius:14px;padding:6px 12px 0;transform:rotate(-2deg)}
+.label{font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted)}
+.card{background:var(--card);border-radius:var(--r-xl);padding:20px}
+.dark{background:var(--ink);color:var(--paper)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.star{display:inline-block;flex:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:62px;border-radius:999px;font-family:var(--display);font-weight:900;font-size:27px;text-transform:uppercase;letter-spacing:.4px;background:var(--ink);color:var(--paper);transition:transform .12s,opacity .2s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn.lime{background:var(--lime);color:var(--ink)}
+.btn.orange{background:var(--orange);color:var(--ink)}
+.btn[disabled]{opacity:.28;pointer-events:none}
+.textbtn{font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;color:var(--muted);padding:8px}
+.sticky-cta{position:sticky;bottom:0;padding-top:10px;padding-bottom:max(6px,env(safe-area-inset-bottom,0px));background:linear-gradient(to bottom,transparent,var(--paper) 30%);margin-top:auto}
+
+/* Hub */
+.hero{display:flex;flex-direction:column;gap:8px;padding:6px 2px 4px;position:relative}
+.hero h1{font-size:76px}
+.hero .tilt{background:var(--lime);font-size:76px}
+.hero .ast{position:absolute;right:4px;top:44px;width:62px;height:62px}
+.tile{border-radius:var(--r-xl);padding:20px;display:flex;flex-direction:column;gap:14px;text-align:left;width:100%;position:relative;overflow:hidden}
+.tile h2{font-size:48px}
+.tile p{font-size:15px;max-width:30ch}
+.tile .go{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 18px;font-weight:700;font-size:15px;background:var(--ink);color:var(--paper)}
+.tile.lime{background:var(--lime)}
+.tile.orange{background:var(--orange)}
+.lock{display:flex;gap:8px}
+.lock input{flex:1;min-width:0;height:54px;border-radius:999px;border:2px solid var(--ink);background:var(--card);padding:0 20px;font-weight:700;font-size:18px;letter-spacing:3px;text-transform:uppercase}
+.lock button{height:54px;padding:0 20px;border-radius:999px;background:var(--ink);color:var(--paper);font-weight:700}
+.err{font-size:14px;font-weight:700;min-height:20px}
+.fineprint{font-size:12px;color:var(--muted);text-align:center;margin-top:6px}
+
+/* Bingo */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.back{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;padding:8px 12px 8px 4px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cell{aspect-ratio:1/1;max-width:100%;border-radius:var(--r-lg);background:var(--card);display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;position:relative;font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.9;font-size:clamp(15px,5vw,23px);overflow-wrap:anywhere;hyphens:manual;transition:background .18s,transform .12s}
+.cell:active{transform:scale(.95)}
+.cell.on{background:var(--lime)}
+.cell.on::after{content:"";position:absolute;inset:7px;border:3px solid var(--ink);border-radius:16px;opacity:.9}
+.cell.free{background:var(--ink);color:var(--lime);pointer-events:none}
+.cell.win{background:var(--orange)}
+.hint{font-size:15px}
+.counter{font-family:var(--display);font-weight:900;font-size:22px;text-transform:uppercase}
+
+/* Auction */
+.bal{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.bal .v{font-family:var(--display);font-weight:900;font-size:46px;font-variant-numeric:tabular-nums}
+.bal .k{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+.dots{display:flex;gap:5px}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.dots i.done-ok{background:var(--lime);outline:1.5px solid var(--ink)}
+.dots i.done-ko{background:var(--orange)}
+.dots i.now{background:var(--ink)}
+.rule{background:var(--card);border-radius:var(--r-xl);padding:22px 20px 24px;display:flex;flex-direction:column;gap:12px;min-height:170px}
+.rule .txt{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:38px;line-height:.92;text-wrap:balance}
+.picks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pick{border-radius:var(--r-lg);padding:16px 12px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;background:var(--card);border:3px solid transparent;text-align:left;transition:background .15s,border-color .15s,transform .12s}
+.pick:active{transform:scale(.97)}
+.pick .d{font-size:30px}
+.pick small{font-size:12.5px;color:var(--muted);font-weight:500}
+.pick[aria-pressed="true"]{border-color:var(--ink)}
+.pick.good[aria-pressed="true"]{background:var(--lime)}
+.pick.trap[aria-pressed="true"]{background:var(--orange)}
+.pick[aria-pressed="true"] small{color:var(--ink)}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.chip{height:58px;border-radius:999px;background:var(--card);font-family:var(--display);font-weight:900;font-size:24px;border:3px solid transparent;font-variant-numeric:tabular-nums;transition:background .15s,transform .12s}
+.chip:active{transform:scale(.95)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--lime)}
+.chip.allin{font-size:19px}
+.chip.allin[aria-pressed="true"]{background:var(--orange);color:var(--ink);border-color:var(--ink)}
+.chip[disabled]{opacity:.25;pointer-events:none}
+.step{display:flex;flex-direction:column;gap:8px}
+.locked{border-radius:var(--r-xl);padding:26px 22px;display:flex;flex-direction:column;gap:14px;background:var(--ink);color:var(--paper)}
+.locked .d{font-size:64px;color:var(--lime)}
+.pulse{display:inline-flex;align-items:center;gap:10px;font-weight:700}
+.pulse i{width:12px;height:12px;border-radius:50%;background:var(--orange);display:block;animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.4}}
+.reveal{border-radius:var(--r-xl);padding:24px 20px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.reveal.good{background:var(--lime)}
+.reveal.trap{background:var(--orange)}
+.stamp{align-self:flex-start;font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:58px;line-height:.85;background:var(--ink);color:var(--paper);border-radius:16px;padding:10px 16px 2px;transform:rotate(-3deg);animation:stamp .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes stamp{from{transform:rotate(-12deg) scale(2.2);opacity:0}to{transform:rotate(-3deg) scale(1);opacity:1}}
+.delta{font-family:var(--display);font-weight:900;font-size:44px;line-height:1;text-transform:uppercase}
+.expl{font-size:17px;font-weight:500}
+.rs{background:var(--ink);color:var(--paper);border-radius:var(--r-lg);padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.rs .label{color:var(--lime)}
+.rs p{font-size:19px;font-weight:700;line-height:1.3}
+.broke{background:var(--card);border-radius:var(--r-lg);padding:14px 16px;font-size:14.5px}
+
+/* End */
+.result{border-radius:var(--r-xl);padding:24px 20px;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.result .big{font-family:var(--display);font-weight:900;font-size:110px;line-height:.8;color:var(--lime);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.result .title{align-self:flex-start;font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:34px;line-height:.9;background:var(--orange);color:var(--ink);border-radius:12px;padding:8px 12px 2px;transform:rotate(-2deg)}
+.hist{display:grid;grid-template-columns:repeat(8,1fr);gap:5px}
+.hist span{aspect-ratio:1/1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:17px}
+.hist .ok{background:var(--lime);color:var(--ink)}
+.hist .ko{background:var(--orange);color:var(--ink)}
+.golden{display:flex;flex-direction:column;gap:8px;list-style:none}
+.golden li{background:var(--card);border-radius:var(--r-lg);padding:14px 16px;display:grid;grid-template-columns:28px 1fr;gap:4px 10px}
+.golden b.n{font-family:var(--display);font-weight:900;font-size:28px;color:var(--orange);line-height:.9;grid-row:span 2}
+.golden .r{font-weight:700}
+.golden .s{font-size:14px;color:var(--muted)}
+
+/* Overlays */
+.overlay{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:calc(24px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px))}
+.overlay.bingo{background:var(--orange)}
+.overlay.raise{background:var(--lime)}
+.overlay .huge{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(96px,32vw,200px);line-height:.8}
+.overlay .sub{font-size:20px;font-weight:700;max-width:22ch}
+.overlay .btn{max-width:320px}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+.confetti i{position:absolute;top:-20px;width:10px;height:16px;border-radius:3px;animation:fall linear forwards}
+@keyframes fall{to{transform:translate3d(var(--dx),110vh,0) rotate(var(--rot))}}
+
+/* Tips bubble */
+.tipbtn{position:fixed;z-index:40;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;height:56px;padding:0 18px 0 8px;border-radius:999px;background:var(--ink);color:var(--paper);box-shadow:0 8px 24px rgba(18,18,18,.25);font-weight:700;font-size:15px;transition:bottom .25s,transform .12s}
+.tipbtn:active{transform:scale(.95)}
+.tipbtn .ic{width:40px;height:40px;border-radius:50%;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:26px;line-height:1;position:relative}
+.tipbtn.new .ic::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:3px solid var(--lime);animation:ring 1.6s infinite}
+@keyframes ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.app.has-cta{padding-bottom:28px}
+.tipbtn.raised{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.scrim{position:fixed;inset:0;z-index:70;background:rgba(18,18,18,.45);display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sheet{width:100%;max-width:480px;max-height:86%;overflow-y:auto;background:var(--paper);border-radius:28px 28px 0 0;padding:10px max(18px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px;animation:up .3s cubic-bezier(.2,.9,.2,1)}
+@keyframes up{from{transform:translateY(40px);opacity:.5}to{transform:none;opacity:1}}
+.grab{width:44px;height:5px;border-radius:9px;background:var(--line);align-self:center;margin-bottom:4px}
+.sheet h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:44px;line-height:.88}
+.sheet .x{width:44px;height:44px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;flex:none}
+.tiplist{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tiplist li{background:var(--card);border-radius:var(--r-lg);padding:13px 15px;display:grid;grid-template-columns:30px 1fr;gap:2px 10px;align-items:start}
+.tiplist b.n{font-family:var(--display);font-weight:900;font-size:26px;line-height:.95;color:var(--orange);grid-row:span 2}
+.tiplist .de{font-weight:700;font-size:15.5px;line-height:1.35}
+.fr{font-size:12.5px;color:var(--muted);font-style:italic;line-height:1.35}
+.phr{background:var(--ink);color:var(--paper);border-radius:var(--r-lg);padding:16px;display:flex;flex-direction:column;gap:10px}
+.phr .label{color:var(--lime)}
+.phr p.de{font-size:16.5px;font-weight:700;line-height:1.3}
+.phr .fr{color:#B9B9B2}
+.words{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.words div{background:var(--card);border-radius:14px;padding:9px 11px;min-width:0}
+.words b{display:block;font-size:14px;overflow-wrap:anywhere}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}.confetti{display:none}.tipbtn.new .ic::after{display:none}}
+@media (min-width:420px){.hero h1,.hero .tilt{font-size:86px}}
+</style>
+
+<div class="app" id="app" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var CODE = "LENA";
+var START = 100;
+var POOL = ["Partner","Köln","kostenlos","Kultur","Disziplin","Sprach­nachricht","Video­anruf","Erasmus","Hoch­schule","Korrektur","Fehler","Rettungs­satz","regel­mäßig","Adresse","Niveau","Lena"];
+var RULES = [
+  {t:"Teilt die Zeit: halb Deutsch, halb Französisch.", good:true, e:"Jeder lernt eine Sprache. 50/50 ist fair.", rs:"Können wir jetzt 15 Minuten nur Deutsch sprechen?"},
+  {t:"Sprecht immer nur über das Wetter.", good:false, e:"Langweilig! Nach zwei Minuten kommt die Stille."},
+  {t:"Bereitet für jedes Gespräch ein Thema vor.", good:true, e:"Mit einem Thema gibt es keine Stille.", rs:"Heute möchte ich über Musik sprechen."},
+  {t:"Ihr habt einen Fehler gemacht? Dann sagt lieber nichts mehr.", good:false, e:"Fehler sind normal. Wer spricht, lernt!"},
+  {t:"Fragt euren Partner nach Korrekturen.", good:true, e:"Euer Partner ist zu nett? Fragt ihn!", rs:"Kannst du mich bitte korrigieren?"},
+  {t:"Euer Partner antwortet nicht? Schreibt ihm zehn Nachrichten pro Tag!", good:false, e:"Zu viel Druck! Schlagt lieber einen festen Termin vor."},
+  {t:"Macht Notizen und wiederholt die neuen Wörter.", good:true, e:"Sonst ist nach einer Woche alles vergessen.", rs:"Kannst du das bitte aufschreiben?"},
+  {t:"Trefft euch regelmäßig, zum Beispiel jeden Dienstag.", good:true, e:"Regelmäßig ist besser als lang.", rs:"Wollen wir uns jeden Dienstag um 18 Uhr treffen?"}
+];
+var GOLDEN = [
+  ["Teilt die Zeit, 50/50!","Können wir jetzt 15 Minuten nur Deutsch sprechen?"],
+  ["Fragt nach Korrekturen!","Kannst du mich bitte korrigieren?"],
+  ["Bereitet ein Thema vor!","Heute möchte ich über Musik sprechen."],
+  ["Macht Notizen und wiederholt die Wörter!","Kannst du das bitte aufschreiben?"],
+  ["Trefft euch regelmäßig!","Wollen wir uns jeden Dienstag um 18 Uhr treffen?"]
+];
+var LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+var KEY = "mission-deutsch-v1";
+var STAR = '<svg class="star" viewBox="0 0 84 84" aria-hidden="true"><g fill="currentColor"><rect x="36" y="0" width="12" height="84" rx="6"/><rect x="36" y="0" width="12" height="84" rx="6" transform="rotate(45 42 42)"/><rect x="36" y="0" width="12" height="84" rx="6" transform="rotate(90 42 42)"/><rect x="36" y="0" width="12" height="84" rx="6" transform="rotate(135 42 42)"/></g></svg>';
+var ARROW = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+var BACK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
+var UP = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9zM7 11l4-8c1.7 0 2.6 1 2.3 2.7L12.7 9H19c1.2 0 2 1 1.8 2.2l-1.3 7A2 2 0 0 1 17.5 20H7"/></svg>';
+var DOWN = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>';
+
+function fresh(){
+  var words = POOL.slice();
+  for (var i = words.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = words[i]; words[i] = words[j]; words[j] = t; }
+  var cells = words.slice(0, 8); cells.splice(4, 0, "Camille");
+  return {view:"hub", bingo:{cells:cells, on:[false,false,false,false,true,false,false,false,false], lines:0},
+    auction:{unlocked:false, team:"", started:false, balance:START, round:0, phase:"choose", pick:null, stake:null, history:[], done:false}};
+}
+var S;
+try { S = JSON.parse(localStorage.getItem(KEY)); } catch (e) { S = null; }
+if (!S || !S.bingo || !S.auction) S = fresh();
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+var app = document.getElementById("app");
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function eur(n){ return n.toLocaleString("de-DE") + " €"; }
+function buzz(p){ try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) {} }
+function go(v){ S.view = v; save(); render(); window.scrollTo(0, 0); }
+
+function render(){
+  var v = S.view;
+  if (v === "bingo") return renderBingo();
+  if (v === "auction") return renderAuction();
+  renderHub();
+}
+
+/* ---------- Hub ---------- */
+var resetArmed = false;
+function renderHub(){
+  setTips("hub");
+  var a = S.auction;
+  var aTile = a.unlocked
+    ? '<button class="tile orange" id="openA"><span class="pill">Etappe 3 · Durchhalten</span><h2 class="d">Regel-<br>Auktion</h2><p>' + (a.done ? 'Euer Ergebnis: <b>' + eur(a.balance) + '</b>' : a.started ? 'Weiterspielen: Regel ' + (a.round + 1) + ' von 8' : 'Zu zweit spielen. 100 € Startgeld. Gute Regel oder Falle?') + '</p><span class="go">' + (a.started ? 'Weiter' : 'Starten') + ARROW + '</span></button>'
+    : '<div class="tile orange"><span class="pill">Etappe 3 · Durchhalten</span><h2 class="d">Regel-<br>Auktion</h2><p>Gesperrt. Augustin und Felix geben euch den Code.</p><form class="lock" id="lockForm" autocomplete="off"><input id="code" name="code" inputmode="text" autocapitalize="characters" spellcheck="false" placeholder="CODE" aria-label="Code"><button type="submit">Öffnen</button></form><p class="err" id="err" role="alert"></p></div>';
+  app.innerHTML = '<section class="view">' +
+    '<div class="hero"><span class="pill" style="align-self:flex-start">POD Sprachen 2.0 · Augustin &amp; Felix</span>' +
+    '<h1 class="d">Mission</h1><p class="d tilt" style="align-self:flex-start">Deutsch!</p>' +
+    '<span class="ast" style="color:var(--orange)">' + STAR + '</span></div>' +
+    '<button class="tile lime" id="openB"><span class="pill">Die ganze Präsentation</span><h2 class="d">Tandem-<br>Bingo</h2><p>Hört gut zu! Tippt auf ein Wort, wenn ihr es hört. Drei in einer Reihe: Bingo!</p><span class="go">' + (S.bingo.lines ? S.bingo.lines + ' × Bingo · weiter' : 'Spielen') + ARROW + '</span></button>' +
+    aTile +
+    '<p class="fineprint">Simulation · Camille und Lena sind erfunden. Kein Konto, keine Daten: alles bleibt auf diesem Handy.</p>' +
+    '<button class="textbtn" id="reset" style="align-self:center">' + (resetArmed ? 'Wirklich alles löschen? Noch einmal tippen.' : 'Neu starten') + '</button>' +
+    '</section>';
+  document.getElementById("openB").onclick = function(){ go("bingo"); };
+  var oa = document.getElementById("openA"); if (oa) oa.onclick = function(){ go("auction"); };
+  var f = document.getElementById("lockForm");
+  if (f) f.onsubmit = function(ev){
+    ev.preventDefault();
+    var val = document.getElementById("code").value.trim().toUpperCase();
+    if (val === CODE) { S.auction.unlocked = true; buzz(30); go("auction"); }
+    else { document.getElementById("err").textContent = val ? "Falscher Code. Hört gut zu!" : "Gebt den Code ein."; buzz([40,40,40]); }
+  };
+  document.getElementById("reset").onclick = function(){
+    if (!resetArmed) { resetArmed = true; renderHub(); setTimeout(function(){ if (resetArmed) { resetArmed = false; if (S.view === "hub") renderHub(); } }, 4000); return; }
+    resetArmed = false; S = fresh(); save(); renderHub();
+  };
+}
+
+/* ---------- Bingo ---------- */
+function countLines(on){ var n = 0, w = {}; LINES.forEach(function(l){ if (on[l[0]] && on[l[1]] && on[l[2]]) { n++; l.forEach(function(i){ w[i] = 1; }); } }); return {n:n, w:w}; }
+function renderBingo(){
+  setTips("bingo");
+  var b = S.bingo, L = countLines(b.on);
+  var cells = b.cells.map(function(w, i){
+    var free = i === 4;
+    var cls = "cell" + (free ? " free" : "") + (b.on[i] && !free ? " on" : "") + (L.w[i] && !free ? " win" : "");
+    return '<button class="' + cls + '" data-i="' + i + '" aria-pressed="' + (b.on[i] ? "true" : "false") + '">' + (free ? '<span style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:26px;height:26px;color:var(--lime)">' + STAR + '</span>Camille</span>' : esc(w)) + '</button>';
+  }).join("");
+  var marked = b.on.filter(Boolean).length - 1;
+  app.innerHTML = '<section class="view">' +
+    '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><span class="pill">Tandem-Bingo</span></div>' +
+    '<div><h2 class="d" style="font-size:60px">Hört gut</h2><p class="d tilt" style="font-size:60px;background:var(--lime)">zu!</p></div>' +
+    '<p class="hint">Augustin oder Felix sagt ein Wort von eurer Karte? Tippt darauf. Drei in einer Reihe, Spalte oder diagonal: Ruft laut <b>„Bingo!“</b></p>' +
+    '<div class="grid">' + cells + '</div>' +
+    '<div class="row"><span class="counter">' + marked + ' / 8 Wörter</span><span class="counter" style="color:var(--orange)">' + (L.n ? L.n + ' × Bingo' : '') + '</span></div>' +
+    '<p class="fineprint">Falsch getippt? Noch einmal tippen.</p>' +
+    '</section>';
+  document.getElementById("home").onclick = function(){ go("hub"); };
+  Array.prototype.forEach.call(app.querySelectorAll(".cell"), function(el){
+    el.onclick = function(){
+      var i = +el.getAttribute("data-i"); if (i === 4) return;
+      b.on[i] = !b.on[i]; buzz(12);
+      var n = countLines(b.on).n, before = b.lines; b.lines = n; save(); renderBingo();
+      if (n > before) showBingo();
+    };
+  });
+}
+function showBingo(){
+  buzz([80,60,80,60,200]); confetti();
+  var o = document.createElement("div"); o.className = "overlay bingo"; o.setAttribute("role", "dialog"); o.setAttribute("aria-label", "Bingo");
+  o.innerHTML = '<span class="pill">Tandem-Bingo</span><p class="huge">Bingo!</p><p class="sub">Steht auf und ruft laut: „Bingo!“ Wir schreiben euren Namen auf.</p><button class="btn" id="closeO">Weiterspielen</button>';
+  document.body.appendChild(o);
+  document.getElementById("closeO").onclick = function(){ o.remove(); };
+}
+function confetti(){
+  var c = document.createElement("div"); c.className = "confetti";
+  var cols = ["var(--lime)","var(--ink)","var(--card)","var(--orange)"];
+  for (var i = 0; i < 60; i++) {
+    var p = document.createElement("i");
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.background = cols[i % 4];
+    p.style.setProperty("--dx", (Math.random() * 40 - 20) + "vw");
+    p.style.setProperty("--rot", (Math.random() * 900 - 450) + "deg");
+    p.style.animationDuration = (1.6 + Math.random() * 1.6) + "s";
+    p.style.animationDelay = (Math.random() * .4) + "s";
+    c.appendChild(p);
+  }
+  document.body.appendChild(c); setTimeout(function(){ c.remove(); }, 3800);
+}
+
+/* ---------- Auction ---------- */
+function dots(){
+  var a = S.auction;
+  return '<div class="dots" aria-label="Fortschritt">' + RULES.map(function(r, i){
+    var h = a.history[i]; var cls = h ? (h.correct ? "done-ok" : "done-ko") : (i === a.round ? "now" : "");
+    return '<i class="' + cls + '"></i>';
+  }).join("") + '</div>';
+}
+function header(){
+  var a = S.auction;
+  return '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><div class="bal"><span class="v" id="balV">' + eur(a.balance) + '</span><span class="k">' + (a.team ? esc(a.team) : 'Euer Konto') + '</span></div></div>';
+}
+function renderAuction(){
+  var a = S.auction;
+  if (!a.unlocked) return go("hub");
+  if (!a.started) return renderSetup();
+  if (a.done) return renderEnd();
+  if (a.phase === "locked") return renderLocked();
+  if (a.phase === "revealed") return renderReveal(false);
+  renderChoose();
+}
+function bindHome(){ var h = document.getElementById("home"); if (h) h.onclick = function(){ go("hub"); }; }
+function renderSetup(){
+  setTips("setup");
+  app.innerHTML = '<section class="view">' +
+    '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><span class="pill">Etappe 3</span></div>' +
+    '<div><h2 class="d" style="font-size:64px">Regel-</h2><p class="d tilt" style="font-size:64px;background:var(--orange)">Auktion!</p></div>' +
+    '<div class="card" style="display:flex;flex-direction:column;gap:14px">' +
+      '<p class="label">So geht\'s</p>' +
+      '<ol class="golden" style="gap:10px">' +
+        '<li style="background:var(--paper)"><b class="n">1</b><span class="r">Ihr spielt zu zweit, mit 100 €.</span><span class="s">Ein Handy pro Tandem.</span></li>' +
+        '<li style="background:var(--paper)"><b class="n">2</b><span class="r">8 Regeln. Gut oder Falle?</span><span class="s">Tippt und setzt Geld: 10, 20, 50 € oder alles!</span></li>' +
+        '<li style="background:var(--paper)"><b class="n">3</b><span class="r">Richtig: Ihr gewinnt den Einsatz.</span><span class="s">Falsch: Das Geld ist weg.</span></li>' +
+      '</ol></div>' +
+    '<div class="step"><label class="label" for="team">Euer Team-Name</label><input id="team" maxlength="18" placeholder="z. B. Die Profis" style="height:58px;border-radius:999px;border:2px solid var(--ink);background:var(--card);padding:0 22px;font-weight:700;font-size:18px;width:100%" value="' + esc(S.auction.team) + '"></div>' +
+    '<div class="sticky-cta"><button class="btn orange" id="start">Los geht\'s' + ARROW + '</button></div>' +
+    '</section>';
+  bindHome();
+  document.getElementById("start").onclick = function(){
+    var t = document.getElementById("team").value.trim();
+    S.auction.team = t || "Team Camille"; S.auction.started = true; save(); buzz(30); render(); window.scrollTo(0, 0);
+  };
+}
+function stakeOptions(){
+  var bal = S.auction.balance;
+  return [10, 20, 50].map(function(v){ return {v:v, label:v + " €", dis:v > bal}; }).concat([{v:"all", label:"Alles!", dis:bal <= 0}]);
+}
+function stakeValue(){ var a = S.auction; if (a.balance <= 0) return 0; return a.stake === "all" ? a.balance : a.stake; }
+function renderChoose(){
+  setTips("choose");
+  var a = S.auction, r = RULES[a.round], broke = a.balance <= 0;
+  var chips = stakeOptions().map(function(o){
+    return '<button class="chip' + (o.v === "all" ? " allin" : "") + '" data-s="' + o.v + '" aria-pressed="' + (String(a.stake) === String(o.v) ? "true" : "false") + '"' + (o.dis ? " disabled" : "") + '>' + o.label + '</button>';
+  }).join("");
+  var ready = a.pick !== null && (broke || a.stake !== null);
+  var ctaTxt = !a.pick ? "Gut oder Falle?" : (!broke && a.stake === null) ? "Wie viel setzt ihr?" : broke ? "Tipp abgeben" : eur(stakeValue()) + " setzen";
+  app.innerHTML = '<section class="view">' + header() +
+    '<div class="row"><span class="pill">Regel ' + (a.round + 1) + ' von 8</span>' + dots() + '</div>' +
+    '<div class="rule"><span class="label">Regel ' + (a.round + 1) + '</span><p class="txt">' + esc(r.t) + '</p></div>' +
+    '<div class="step"><span class="label">1 · Euer Tipp</span><div class="picks">' +
+      '<button class="pick good" data-p="good" aria-pressed="' + (a.pick === "good") + '">' + UP + '<span class="d">Gute Regel</span><small>Das hilft im Tandem.</small></button>' +
+      '<button class="pick trap" data-p="trap" aria-pressed="' + (a.pick === "trap") + '">' + DOWN + '<span class="d">Falle!</span><small>Das ist keine gute Idee.</small></button>' +
+    '</div></div>' +
+    (broke
+      ? '<div class="broke"><b>Pleite!</b> Ihr habt kein Geld mehr. Spielt trotzdem weiter: Jeder richtige Tipp zählt für eure Ehre.</div>'
+      : '<div class="step"><span class="label">2 · Euer Einsatz</span><div class="chips">' + chips + '</div></div>') +
+    '<div class="sticky-cta"><button class="btn" id="lock"' + (ready ? "" : " disabled") + '>' + ctaTxt + '</button></div>' +
+    '</section>';
+  bindHome();
+  Array.prototype.forEach.call(app.querySelectorAll(".pick"), function(el){ el.onclick = function(){ a.pick = el.getAttribute("data-p"); buzz(10); save(); renderChoose(); }; });
+  Array.prototype.forEach.call(app.querySelectorAll(".chip"), function(el){ el.onclick = function(){ var s = el.getAttribute("data-s"); a.stake = s === "all" ? "all" : +s; buzz(10); save(); renderChoose(); }; });
+  document.getElementById("lock").onclick = function(){ a.lockedStake = stakeValue(); a.phase = "locked"; buzz(40); save(); render(); window.scrollTo(0, 0); };
+}
+function renderLocked(){
+  setTips("locked");
+  var a = S.auction;
+  app.innerHTML = '<section class="view">' + header() +
+    '<div class="row"><span class="pill">Regel ' + (a.round + 1) + ' von 8</span>' + dots() + '</div>' +
+    '<div class="locked"><p class="d">Gesetzt!</p>' +
+      '<p style="font-size:19px;font-weight:700">' + (a.lockedStake ? eur(a.lockedStake) + ' auf ' : 'Euer Tipp: ') + (a.pick === "good" ? '„Gute Regel“' : '„Falle“') + '</p>' +
+      '<p style="font-size:15px;opacity:.8">„' + esc(RULES[a.round].t) + '“</p>' +
+      '<p class="pulse"><i></i>Schaut auf die Leinwand!</p></div>' +
+    '<p class="hint">Die Antwort kommt gleich auf die Leinwand. Erst dann: Aufdecken!</p>' +
+    '<div class="sticky-cta"><button class="btn orange" id="rev">Aufdecken</button></div>' +
+    '</section>';
+  bindHome();
+  document.getElementById("rev").onclick = function(){
+    var r = RULES[a.round], correct = (a.pick === "good") === r.good, st = a.lockedStake || 0, before = a.balance;
+    a.balance = Math.max(0, before + (correct ? st : -st));
+    a.history[a.round] = {pick:a.pick, stake:st, correct:correct, delta:a.balance - before};
+    a.phase = "revealed"; save(); buzz(correct ? [30,40,30] : [200]);
+    renderReveal(true, before);
+  };
+}
+function animateBal(from, to){
+  var el = document.getElementById("balV"); if (!el || from === to) return;
+  var t0 = null, d = 700;
+  function step(t){ if (!t0) t0 = t; var k = Math.min(1, (t - t0) / d); k = 1 - Math.pow(1 - k, 3); el.textContent = eur(Math.round((from + (to - from) * k) / 10) * 10); if (k < 1) requestAnimationFrame(step); else el.textContent = eur(to); }
+  requestAnimationFrame(step);
+}
+function renderReveal(animate, before){
+  setTips(RULES[S.auction.round].good ? "revealGood" : "revealTrap");
+  var a = S.auction, r = RULES[a.round], h = a.history[a.round], last = a.round === RULES.length - 1;
+  var deltaTxt = h.stake ? (h.correct ? "Richtig! +" + eur(h.stake) : "Daneben! −" + eur(h.stake)) : (h.correct ? "Richtig getippt!" : "Daneben!");
+  app.innerHTML = '<section class="view">' + header() +
+    '<div class="row"><span class="pill">Regel ' + (a.round + 1) + ' von 8</span>' + dots() + '</div>' +
+    '<div class="reveal ' + (r.good ? "good" : "trap") + '">' +
+      '<p class="stamp">' + (r.good ? "Gute Regel!" : "Falle!") + '</p>' +
+      '<p style="font-size:15px;font-weight:700">„' + esc(r.t) + '“</p>' +
+      '<p class="delta">' + deltaTxt + '</p>' +
+      '<p class="expl">' + esc(r.e) + '</p>' +
+      (r.rs ? '<div class="rs"><span class="label">Rettungssatz · alle zusammen!</span><p>„' + esc(r.rs) + '“</p></div>' : '') +
+    '</div>' +
+    '<div class="sticky-cta"><button class="btn" id="next">' + (last ? "Ergebnis ansehen" : "Nächste Regel") + ARROW + '</button></div>' +
+    '</section>';
+  bindHome();
+  if (animate) { document.getElementById("balV").textContent = eur(before); animateBal(before, a.balance); if (h.correct && h.stake >= 50) confetti(); }
+  document.getElementById("next").onclick = function(){
+    if (last) { a.done = true; } else { a.round++; a.phase = "choose"; a.pick = null; a.stake = null; a.lockedStake = 0; }
+    save(); render(); window.scrollTo(0, 0); if (last) { buzz([60,40,60,40,160]); confetti(); }
+  };
+}
+function rank(b){
+  if (b <= 0) return "Pleite! Aber jetzt kennt ihr die Regeln.";
+  if (b < 100) return "Knapp daneben!";
+  if (b < 200) return "Solides Tandem!";
+  if (b < 1000) return "Tandem-Profis!";
+  return "Tandem-Millionäre!";
+}
+function renderEnd(){
+  setTips("end");
+  var a = S.auction, ok = a.history.filter(function(h){ return h && h.correct; }).length;
+  var hist = RULES.map(function(r, i){ var h = a.history[i]; return '<span class="' + (h && h.correct ? "ok" : "ko") + '" aria-label="Regel ' + (i + 1) + (h && h.correct ? ' richtig' : ' falsch') + '">' + (i + 1) + '</span>'; }).join("");
+  var gold = GOLDEN.map(function(g, i){ return '<li><b class="n">' + (i + 1) + '</b><span class="r">' + esc(g[0]) + '</span><span class="s">„' + esc(g[1]) + '“</span></li>'; }).join("");
+  app.innerHTML = '<section class="view">' +
+    '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><span class="pill">Ergebnis</span></div>' +
+    '<div class="result"><span class="label" style="color:var(--paper);opacity:.75">' + esc(a.team) + ' · ' + ok + ' von 8 richtig</span>' +
+      '<p class="big">' + eur(a.balance) + '</p><p class="title">' + rank(a.balance) + '</p></div>' +
+    '<div class="hist">' + hist + '</div>' +
+    '<button class="btn orange" id="raise">Hoch damit!</button>' +
+    '<p class="label" style="margin-top:6px">Die 5 goldenen Regeln</p><ol class="golden">' + gold + '</ol>' +
+    '</section>';
+  bindHome();
+  document.getElementById("raise").onclick = function(){
+    var o = document.createElement("div"); o.className = "overlay raise"; o.setAttribute("role", "dialog"); o.setAttribute("aria-label", "Ergebnis zeigen");
+    o.innerHTML = '<span class="pill">' + esc(a.team) + '</span><p class="huge" style="font-size:clamp(72px,24vw,160px)">' + eur(a.balance) + '</p><p class="sub">Handy hoch! Alle sehen euer Ergebnis.</p><button class="btn" id="closeR">Zurück</button>';
+    document.body.appendChild(o); buzz(30);
+    document.getElementById("closeR").onclick = function(){ o.remove(); };
+  };
+}
+
+/* ---------- Tipps-Bubble ---------- */
+var TIPS = {
+  hub: {t:"So funktioniert's", sub:"Die Mission-Deutsch-App", tips:[
+    ["Lasst die App die ganze Präsentation offen.", "Gardez l'app ouverte pendant toute la présentation."],
+    ["Tandem-Bingo spielt ihr allein, auf eurem Handy.", "Le Bingo se joue seul, sur son téléphone."],
+    ["Die Regel-Auktion kommt in Etappe 3. Den Code sagen Augustin und Felix.", "La Regel-Auktion arrive à l'étape 3 ; le code est donné à l'oral."],
+    ["Stellt euer Handy auf lautlos.", "Mettez votre téléphone en silencieux."],
+    ["Keine Angst: Die App speichert alles auf eurem Handy.", "Rien ne se perd : tout est enregistré sur le téléphone."]]},
+  bingo: {t:"Bingo-Tipps", sub:"Hört gut zu!", tips:[
+    ["Hört auf Augustin und Felix. Ihr Wort ist auf eurer Karte? Tippt darauf!", "Un mot de votre grille est prononcé ? Touchez-le."],
+    ["Falsch getippt? Einfach noch einmal tippen.", "Erreur ? Touchez une deuxième fois."],
+    ["Drei in einer Reihe, Spalte oder diagonal: Bingo!", "Trois alignés, en ligne, colonne ou diagonale."],
+    ["Camille in der Mitte ist schon gratis.", "La case Camille au centre est offerte."],
+    ["Bingo? Steht auf und ruft laut: „Bingo!“", "Levez-vous et criez « Bingo! »."]],
+    words:[["Partner","partenaire"],["kostenlos","gratuit"],["Kultur","culture"],["Disziplin","discipline"],["Sprachnachricht","message vocal"],["Videoanruf","appel vidéo"],["Hochschule","école, université"],["Erasmus","échange Erasmus"],["Korrektur","correction"],["Fehler","erreur"],["Rettungssatz","phrase de secours"],["regelmäßig","régulièrement"],["Adresse","adresse"],["Niveau","niveau"],["Köln","Cologne"],["Lena","la partenaire de Camille"]]},
+  setup: {t:"Vor dem Start", sub:"Regel-Auktion", tips:[
+    ["Ein Handy pro Tandem. Setzt euch nebeneinander.", "Un téléphone par binôme, côte à côte."],
+    ["Findet einen lustigen Team-Namen!", "Trouvez un nom d'équipe drôle."],
+    ["Sprecht zusammen Deutsch, auch beim Entscheiden.", "Décidez ensemble, en allemand."],
+    ["Drei von acht Regeln sind Fallen. Passt auf!", "Trois règles sur huit sont des pièges."]]},
+  choose: {t:"Gut oder Falle?", sub:"Entscheidet zu zweit", tips:[
+    ["Lest die Regel laut, zu zweit.", "Lisez la règle à voix haute, à deux."],
+    ["Fragt euch: Hilft das beim Deutschlernen? Ja? Dann ist es eine gute Regel.", "Est-ce que ça aide à apprendre ? Si oui, c'est une bonne règle."],
+    ["Nicht sicher? Setzt wenig, zum Beispiel 10 €.", "Pas sûrs ? Misez peu."],
+    ["Ganz sicher? Dann: Alles!", "Sûrs de vous ? Tapis !"],
+    ["Ihr habt etwa 10 Sekunden. Dann sagt Felix: Stopp!", "Environ 10 secondes avant « Stopp! »."]],
+    phrases:[["Ich glaube, das ist eine gute Regel, weil …","Je crois que c'est une bonne règle, parce que …"],["Das ist eine Falle!","C'est un piège !"],["Ich bin nicht sicher.","Je ne suis pas sûr."],["Wie viel setzen wir? Zwanzig Euro?","On mise combien ? Vingt euros ?"],["Okay, wir setzen alles!","OK, on mise tout !"]]},
+  locked: {t:"Gesetzt!", sub:"Jetzt kommt die Antwort", tips:[
+    ["Schaut auf die Leinwand: Dort kommt die Antwort.", "La réponse s'affiche sur l'écran de la classe."],
+    ["Erst dann: Aufdecken!", "Ensuite seulement : touchez « Aufdecken »."],
+    ["Euer Einsatz ist fest. Ändern geht nicht mehr.", "Votre mise est verrouillée."],
+    ["Bereitet euren Satz vor. Vielleicht fragt Augustin euch!", "Préparez votre phrase : Augustin peut vous interroger."]],
+    phrases:[["Wir haben 50 Euro gesetzt, weil …","Nous avons misé 50 euros, parce que …"],["Wir waren nicht sicher.","Nous n'étions pas sûrs."]]},
+  revealGood: {t:"Gute Regel!", sub:"Merkt euch den Satz", tips:[
+    ["Sprecht den Rettungssatz laut mit der Klasse.", "Répétez la phrase de secours avec la classe."],
+    ["Diesen Satz könnt ihr in eurem echten Tandem sagen.", "Cette phrase servira dans un vrai tandem."],
+    ["Augustin fragt vielleicht: „Wie viel habt ihr gesetzt? Warum?“", "Augustin peut vous demander combien et pourquoi."]],
+    phrases:[["Wir haben 20 Euro gesetzt, weil wir sicher waren.","Nous avons misé 20 euros parce que nous étions sûrs."],["Wir haben gewonnen!","Nous avons gagné !"]]},
+  revealTrap: {t:"Falle!", sub:"Das macht man besser nicht", tips:[
+    ["Hört gut zu: Warum ist das keine gute Idee?", "Écoutez pourquoi ce n'est pas une bonne idée."],
+    ["Geld verloren? Kein Problem: Die nächste Regel kommt!", "Argent perdu ? La prochaine règle arrive."],
+    ["Pleite? Ihr spielt trotzdem weiter, für die Ehre.", "À zéro ? Vous continuez pour l'honneur."]],
+    phrases:[["Wir haben Geld verloren.","Nous avons perdu de l'argent."],["Das war eine Falle!","C'était un piège !"]]},
+  end: {t:"Geschafft!", sub:"Und jetzt?", tips:[
+    ["Tippt auf „Hoch damit!“ und zeigt euer Ergebnis.", "Touchez « Hoch damit! » et montrez votre score."],
+    ["Macht einen Screenshot der 5 goldenen Regeln.", "Faites une capture d'écran des 5 règles."],
+    ["Probiert ein echtes Tandem: Tandem, HelloTalk oder ConversationExchange.", "Essayez un vrai tandem avec ces plateformes."],
+    ["Euer Tandem-Pass hilft euch beim Start.", "Votre Tandem-Pass vous aide à démarrer."]]}
+};
+var tipKey = "hub";
+var tipBtn = document.createElement("button");
+tipBtn.className = "tipbtn"; tipBtn.type = "button"; tipBtn.setAttribute("aria-haspopup", "dialog");
+tipBtn.innerHTML = '<span class="ic" aria-hidden="true">?</span><span>Tipps</span>';
+document.body.appendChild(tipBtn);
+tipBtn.onclick = function(){ openTips(); };
+function setTips(key){
+  tipKey = key;
+  S.seenTips = S.seenTips || {};
+  tipBtn.classList.toggle("new", !S.seenTips[key]);
+  tipBtn.setAttribute("aria-label", "Tipps: " + TIPS[key].t);
+  var hasCta = !!app.querySelector(".sticky-cta"); app.classList.toggle("has-cta", hasCta); tipBtn.classList.toggle("raised", hasCta); requestAnimationFrame(function(){ var c = !!app.querySelector(".sticky-cta"); app.classList.toggle("has-cta", c); tipBtn.classList.toggle("raised", c); });
+}
+function openTips(){
+  var T = TIPS[tipKey]; S.seenTips = S.seenTips || {}; S.seenTips[tipKey] = 1; save(); tipBtn.classList.remove("new");
+  var li = T.tips.map(function(t, i){ return '<li><b class="n">' + (i + 1) + '</b><span class="de">' + esc(t[0]) + '</span><span class="fr">' + esc(t[1]) + '</span></li>'; }).join("");
+  var ph = T.phrases ? '<div class="phr"><span class="label">Nützliche Sätze</span>' + T.phrases.map(function(p){ return '<div><p class="de">„' + esc(p[0]) + '“</p><p class="fr">' + esc(p[1]) + '</p></div>'; }).join("") + '</div>' : "";
+  var wd = T.words ? '<p class="label">Wörter-Hilfe</p><div class="words">' + T.words.map(function(w){ return '<div><b>' + esc(w[0]) + '</b><span class="fr">' + esc(w[1]) + '</span></div>'; }).join("") + '</div>' : "";
+  var sc = document.createElement("div"); sc.className = "scrim";
+  sc.innerHTML = '<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="tipT"><span class="grab"></span>' +
+    '<div class="row" style="align-items:flex-start"><div><span class="pill" style="margin-bottom:10px">' + esc(T.sub) + '</span><h3 id="tipT" style="margin-top:10px">' + esc(T.t) + '</h3></div>' +
+    '<button class="x" id="tipX" aria-label="Schließen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
+    '<ol class="tiplist">' + li + '</ol>' + ph + wd +
+    '<button class="btn" id="tipOk">Alles klar!</button></div>';
+  document.body.appendChild(sc);
+  function close(){ sc.remove(); document.removeEventListener("keydown", onKey); tipBtn.focus(); }
+  function onKey(e){ if (e.key === "Escape") close(); }
+  document.addEventListener("keydown", onKey);
+  sc.addEventListener("click", function(e){ if (e.target === sc) close(); });
+  document.getElementById("tipX").onclick = close;
+  document.getElementById("tipOk").onclick = close;
+  var sh = sc.querySelector(".sheet"); sh.scrollTop = 0; try { document.getElementById("tipX").focus({preventScroll:true}); } catch (e) {}
+}
+
+render();
+})();
+</script>
+
+</body>
+</html>
