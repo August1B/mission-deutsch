@@ -173,6 +173,8 @@ button{cursor:pointer;border:0;background:none}
 .words{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .words div{background:var(--card);border-radius:14px;padding:9px 11px;min-width:0}
 .words b{display:block;font-size:14px;overflow-wrap:anywhere}
+.lang{height:44px;padding:0 14px;border-radius:999px;background:var(--lime);color:var(--ink);font-weight:700;font-size:14px;border:2px solid var(--ink)}
+.lang[aria-pressed="true"]{background:var(--ink);color:var(--lime)}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}.confetti{display:none}.tipbtn.new .ic::after{display:none}}
 @media (min-width:420px){.hero h1,.hero .tilt{font-size:86px}}
 </style>
@@ -471,48 +473,48 @@ function renderEnd(){
 
 /* ---------- Tipps-Bubble ---------- */
 var TIPS = {
-  hub: {t:"So funktioniert's", sub:"Die Mission-Deutsch-App", tips:[
+  hub: {t:"So funktioniert's", sub:"Die Mission-Deutsch-App", tFr:"Mode d'emploi", subFr:"L'app Mission Deutsch", tips:[
     ["Lasst die App die ganze Präsentation offen.", "Gardez l'app ouverte pendant toute la présentation."],
     ["Tandem-Bingo spielt ihr allein, auf eurem Handy.", "Le Bingo se joue seul, sur son téléphone."],
     ["Die Regel-Auktion kommt in Etappe 3. Den Code sagen Augustin und Felix.", "La Regel-Auktion arrive à l'étape 3 ; le code est donné à l'oral."],
     ["Stellt euer Handy auf lautlos.", "Mettez votre téléphone en silencieux."],
     ["Keine Angst: Die App speichert alles auf eurem Handy.", "Rien ne se perd : tout est enregistré sur le téléphone."]]},
-  bingo: {t:"Bingo-Tipps", sub:"Hört gut zu!", tips:[
+  bingo: {t:"Bingo-Tipps", sub:"Hört gut zu!", tFr:"Conseils Bingo", subFr:"Écoutez bien !", tips:[
     ["Hört auf Augustin und Felix. Ihr Wort ist auf eurer Karte? Tippt darauf!", "Un mot de votre grille est prononcé ? Touchez-le."],
     ["Falsch getippt? Einfach noch einmal tippen.", "Erreur ? Touchez une deuxième fois."],
     ["Drei in einer Reihe, Spalte oder diagonal: Bingo!", "Trois alignés, en ligne, colonne ou diagonale."],
     ["Camille in der Mitte ist schon gratis.", "La case Camille au centre est offerte."],
     ["Bingo? Steht auf und ruft laut: „Bingo!“", "Levez-vous et criez « Bingo! »."]],
     words:[["Partner","partenaire"],["kostenlos","gratuit"],["Kultur","culture"],["Disziplin","discipline"],["Sprachnachricht","message vocal"],["Videoanruf","appel vidéo"],["Hochschule","école, université"],["Erasmus","échange Erasmus"],["Korrektur","correction"],["Fehler","erreur"],["Rettungssatz","phrase de secours"],["regelmäßig","régulièrement"],["Adresse","adresse"],["Niveau","niveau"],["Köln","Cologne"],["Lena","la partenaire de Camille"]]},
-  setup: {t:"Vor dem Start", sub:"Regel-Auktion", tips:[
+  setup: {t:"Vor dem Start", sub:"Regel-Auktion", tFr:"Avant de commencer", subFr:"Regel-Auktion", tips:[
     ["Ein Handy pro Tandem. Setzt euch nebeneinander.", "Un téléphone par binôme, côte à côte."],
     ["Findet einen lustigen Team-Namen!", "Trouvez un nom d'équipe drôle."],
     ["Sprecht zusammen Deutsch, auch beim Entscheiden.", "Décidez ensemble, en allemand."],
     ["Drei von acht Regeln sind Fallen. Passt auf!", "Trois règles sur huit sont des pièges."]]},
-  choose: {t:"Gut oder Falle?", sub:"Entscheidet zu zweit", tips:[
+  choose: {t:"Gut oder Falle?", sub:"Entscheidet zu zweit", tFr:"Bonne règle ou piège ?", subFr:"Décidez à deux", tips:[
     ["Lest die Regel laut, zu zweit.", "Lisez la règle à voix haute, à deux."],
     ["Fragt euch: Hilft das beim Deutschlernen? Ja? Dann ist es eine gute Regel.", "Est-ce que ça aide à apprendre ? Si oui, c'est une bonne règle."],
     ["Nicht sicher? Setzt wenig, zum Beispiel 10 €.", "Pas sûrs ? Misez peu."],
     ["Ganz sicher? Dann: Alles!", "Sûrs de vous ? Tapis !"],
     ["Ihr habt etwa 10 Sekunden. Dann sagt Felix: Stopp!", "Environ 10 secondes avant « Stopp! »."]],
     phrases:[["Ich glaube, das ist eine gute Regel, weil …","Je crois que c'est une bonne règle, parce que …"],["Das ist eine Falle!","C'est un piège !"],["Ich bin nicht sicher.","Je ne suis pas sûr."],["Wie viel setzen wir? Zwanzig Euro?","On mise combien ? Vingt euros ?"],["Okay, wir setzen alles!","OK, on mise tout !"]]},
-  locked: {t:"Gesetzt!", sub:"Jetzt kommt die Antwort", tips:[
+  locked: {t:"Gesetzt!", sub:"Jetzt kommt die Antwort", tFr:"Mise validée !", subFr:"La réponse arrive", tips:[
     ["Schaut auf die Leinwand: Dort kommt die Antwort.", "La réponse s'affiche sur l'écran de la classe."],
     ["Erst dann: Aufdecken!", "Ensuite seulement : touchez « Aufdecken »."],
     ["Euer Einsatz ist fest. Ändern geht nicht mehr.", "Votre mise est verrouillée."],
     ["Bereitet euren Satz vor. Vielleicht fragt Augustin euch!", "Préparez votre phrase : Augustin peut vous interroger."]],
     phrases:[["Wir haben 50 Euro gesetzt, weil …","Nous avons misé 50 euros, parce que …"],["Wir waren nicht sicher.","Nous n'étions pas sûrs."]]},
-  revealGood: {t:"Gute Regel!", sub:"Merkt euch den Satz", tips:[
+  revealGood: {t:"Gute Regel!", sub:"Merkt euch den Satz", tFr:"Bonne règle !", subFr:"Retenez la phrase", tips:[
     ["Sprecht den Rettungssatz laut mit der Klasse.", "Répétez la phrase de secours avec la classe."],
     ["Diesen Satz könnt ihr in eurem echten Tandem sagen.", "Cette phrase servira dans un vrai tandem."],
     ["Augustin fragt vielleicht: „Wie viel habt ihr gesetzt? Warum?“", "Augustin peut vous demander combien et pourquoi."]],
     phrases:[["Wir haben 20 Euro gesetzt, weil wir sicher waren.","Nous avons misé 20 euros parce que nous étions sûrs."],["Wir haben gewonnen!","Nous avons gagné !"]]},
-  revealTrap: {t:"Falle!", sub:"Das macht man besser nicht", tips:[
+  revealTrap: {t:"Falle!", sub:"Das macht man besser nicht", tFr:"Piège !", subFr:"À éviter", tips:[
     ["Hört gut zu: Warum ist das keine gute Idee?", "Écoutez pourquoi ce n'est pas une bonne idée."],
     ["Geld verloren? Kein Problem: Die nächste Regel kommt!", "Argent perdu ? La prochaine règle arrive."],
     ["Pleite? Ihr spielt trotzdem weiter, für die Ehre.", "À zéro ? Vous continuez pour l'honneur."]],
     phrases:[["Wir haben Geld verloren.","Nous avons perdu de l'argent."],["Das war eine Falle!","C'était un piège !"]]},
-  end: {t:"Geschafft!", sub:"Und jetzt?", tips:[
+  end: {t:"Geschafft!", sub:"Und jetzt?", tFr:"Terminé !", subFr:"Et maintenant ?", tips:[
     ["Tippt auf „Hoch damit!“ und zeigt euer Ergebnis.", "Touchez « Hoch damit! » et montrez votre score."],
     ["Macht einen Screenshot der 5 goldenen Regeln.", "Faites une capture d'écran des 5 règles."],
     ["Probiert ein echtes Tandem: Tandem, HelloTalk oder ConversationExchange.", "Essayez un vrai tandem avec ces plateformes."],
@@ -531,25 +533,38 @@ function setTips(key){
   tipBtn.setAttribute("aria-label", "Tipps: " + TIPS[key].t);
   var hasCta = !!app.querySelector(".sticky-cta"); app.classList.toggle("has-cta", hasCta); tipBtn.classList.toggle("raised", hasCta); requestAnimationFrame(function(){ var c = !!app.querySelector(".sticky-cta"); app.classList.toggle("has-cta", c); tipBtn.classList.toggle("raised", c); });
 }
+function tipLang(){ return S.tipLang === "fr" ? "fr" : "de"; }
+function tipsHTML(){
+  var T = TIPS[tipKey], fr = tipLang() === "fr";
+  var L = fr ? {phr:"Phrases utiles (à dire en allemand)", words:"Aide vocabulaire", ok:"C'est compris !", hint:"", close:"Fermer", sw:"Deutsch"} :
+               {phr:"Nützliche Sätze", words:"Wörter-Hilfe", ok:"Alles klar!", hint:"Übersetzung? Tippt oben auf „Français“.", close:"Schließen", sw:"Français"};
+  var li = T.tips.map(function(t, i){ return '<li><b class="n">' + (i + 1) + '</b><span class="de">' + esc(fr ? t[1] : t[0]) + '</span></li>'; }).join("");
+  var ph = T.phrases ? '<div class="phr"><span class="label">' + L.phr + '</span>' + T.phrases.map(function(p){ return '<div><p class="de">„' + esc(p[0]) + '“</p>' + (fr ? '<p class="fr">' + esc(p[1]) + '</p>' : '') + '</div>'; }).join("") + '</div>' : "";
+  var wd = T.words ? '<p class="label">' + L.words + '</p><div class="words">' + T.words.map(function(w){ return '<div><b>' + esc(w[0]) + '</b>' + (fr ? '<span class="fr">' + esc(w[1]) + '</span>' : '') + '</div>'; }).join("") + '</div>' + (fr ? '' : '<p class="fr" style="font-style:normal">' + L.hint + '</p>') : "";
+  return '<span class="grab"></span>' +
+    '<div class="row" style="align-items:flex-start"><div style="min-width:0"><span class="pill">' + esc(fr ? T.subFr : T.sub) + '</span><h3 id="tipT" style="margin-top:10px">' + esc(fr ? T.tFr : T.t) + '</h3></div>' +
+    '<div style="display:flex;gap:8px;flex:none"><button class="lang" id="tipLang" aria-pressed="' + fr + '" lang="' + (fr ? "de" : "fr") + '">' + L.sw + '</button>' +
+    '<button class="x" id="tipX" aria-label="' + L.close + '"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div>' +
+    '<ol class="tiplist" lang="' + (fr ? "fr" : "de") + '">' + li + '</ol>' + ph + wd +
+    '<button class="btn" id="tipOk">' + L.ok + '</button>';
+}
 function openTips(){
-  var T = TIPS[tipKey]; S.seenTips = S.seenTips || {}; S.seenTips[tipKey] = 1; save(); tipBtn.classList.remove("new");
-  var li = T.tips.map(function(t, i){ return '<li><b class="n">' + (i + 1) + '</b><span class="de">' + esc(t[0]) + '</span><span class="fr">' + esc(t[1]) + '</span></li>'; }).join("");
-  var ph = T.phrases ? '<div class="phr"><span class="label">Nützliche Sätze</span>' + T.phrases.map(function(p){ return '<div><p class="de">„' + esc(p[0]) + '“</p><p class="fr">' + esc(p[1]) + '</p></div>'; }).join("") + '</div>' : "";
-  var wd = T.words ? '<p class="label">Wörter-Hilfe</p><div class="words">' + T.words.map(function(w){ return '<div><b>' + esc(w[0]) + '</b><span class="fr">' + esc(w[1]) + '</span></div>'; }).join("") + '</div>' : "";
+  S.seenTips = S.seenTips || {}; S.seenTips[tipKey] = 1; save(); tipBtn.classList.remove("new");
   var sc = document.createElement("div"); sc.className = "scrim";
-  sc.innerHTML = '<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="tipT"><span class="grab"></span>' +
-    '<div class="row" style="align-items:flex-start"><div><span class="pill" style="margin-bottom:10px">' + esc(T.sub) + '</span><h3 id="tipT" style="margin-top:10px">' + esc(T.t) + '</h3></div>' +
-    '<button class="x" id="tipX" aria-label="Schließen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
-    '<ol class="tiplist">' + li + '</ol>' + ph + wd +
-    '<button class="btn" id="tipOk">Alles klar!</button></div>';
-  document.body.appendChild(sc);
+  var sh = document.createElement("div"); sh.className = "sheet"; sh.setAttribute("role", "dialog"); sh.setAttribute("aria-modal", "true"); sh.setAttribute("aria-labelledby", "tipT");
+  sc.appendChild(sh); document.body.appendChild(sc);
   function close(){ sc.remove(); document.removeEventListener("keydown", onKey); tipBtn.focus(); }
   function onKey(e){ if (e.key === "Escape") close(); }
+  function paint(focusId){
+    sh.innerHTML = tipsHTML(); sh.scrollTop = 0;
+    document.getElementById("tipX").onclick = close;
+    document.getElementById("tipOk").onclick = close;
+    document.getElementById("tipLang").onclick = function(){ S.tipLang = tipLang() === "fr" ? "de" : "fr"; save(); buzz(10); paint("tipLang"); };
+    try { document.getElementById(focusId).focus({preventScroll:true}); } catch (e) {}
+  }
   document.addEventListener("keydown", onKey);
   sc.addEventListener("click", function(e){ if (e.target === sc) close(); });
-  document.getElementById("tipX").onclick = close;
-  document.getElementById("tipOk").onclick = close;
-  var sh = sc.querySelector(".sheet"); sh.scrollTop = 0; try { document.getElementById("tipX").focus({preventScroll:true}); } catch (e) {}
+  paint("tipX");
 }
 
 render();
