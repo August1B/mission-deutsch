@@ -156,6 +156,67 @@ button{cursor:pointer;border:0;background:none}
 .kpis span{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
 .hist{grid-template-columns:repeat(8,1fr)}
 
+
+/* Wett-App: kompakt, damit alles auf einen Bildschirm passt */
+.view.bet{gap:10px}
+.bet .topbar{min-height:40px}
+.bet .back{height:38px;font-size:14px;padding:0 12px 0 8px}
+.bet .bal .v{font-size:32px}
+.bet .bal .k{font-size:10px}
+.bet .stat{padding:6px 8px 6px 12px}
+.bet .stat .lv{font-size:11px}
+.bet .rule{padding:16px 16px 18px;gap:8px;min-height:0;border-radius:var(--r-lg)}
+.bet .rule .txt{font-size:26px;line-height:.95}
+.bet .label{font-size:11px;letter-spacing:1.3px}
+.bet .hintbtn{height:32px;font-size:13px;padding:0 12px}
+.bet .hintbox{font-size:14px;padding:10px 12px}
+.bet .picks{gap:8px}
+.bet .pick{padding:10px 12px;gap:6px;border-radius:var(--r-md);flex-direction:row;flex-wrap:wrap;align-items:center}
+.bet .pick svg{width:20px;height:20px}
+.bet .pick .d{font-size:21px;flex:1}
+.bet .pick .odd{font-size:22px;padding:4px 10px 1px;flex-basis:100%}
+.bet .slip{padding:12px;gap:9px;border-radius:var(--r-lg)}
+.bet .chips{gap:6px}
+.bet .chip{height:40px!important;font-size:17px!important}
+.bet .chip.allin{font-size:13px!important}
+.bet .custom{grid-template-columns:40px 1fr auto 40px;padding:3px}
+.bet .custom input{height:38px;font-size:20px}
+.bet .custom input::placeholder{font-size:13px}
+.bet .stp{width:38px;height:38px;font-size:20px}
+.bet .win{padding-top:7px;font-size:14px}
+.bet .win b{font-size:22px}
+.bet .badge{font-size:10.5px;padding:4px 9px}
+.bet .btn{min-height:50px;font-size:21px}
+.bet .twobtn .btn{font-size:18px;min-height:48px}
+.bet .broke{font-size:13.5px;padding:10px 12px}
+.bet .reveal{padding:16px;gap:8px;border-radius:var(--r-lg)}
+.bet .stamp{font-size:36px;padding:7px 12px 1px;border-radius:12px}
+.bet .reveal p[style]{font-size:13.5px!important}
+.bet .delta{font-size:28px}
+.bet .calc{font-size:14px}
+.bet .expl{font-size:15px}
+.bet .rs{padding:11px 14px;gap:4px;border-radius:var(--r-md)}
+.bet .rs p{font-size:16px}
+.bet .frx{padding:8px 12px;font-size:14px}
+.bet .frx p{font-size:14px}
+.bet .note{padding:10px 12px;font-size:14px}
+.bet h2.d,.bet p.d.tilt{font-size:46px!important}
+.bet .card{padding:14px}
+.bet .golden{gap:6px}
+.bet .golden li{padding:10px 12px;grid-template-columns:24px 1fr}
+.bet .golden b.n{font-size:22px}
+.bet .golden .r{font-size:14.5px}
+.bet .golden .s{font-size:12.5px}
+.bet .field{height:48px;font-size:16px}
+.bet .result{padding:16px;gap:6px}
+.bet .result .big{font-size:68px}
+.bet .result .title{font-size:24px}
+.bet .kpis div{padding:9px 8px}
+.bet .kpis b{font-size:18px}
+.bet .kpis span{font-size:9.5px}
+.bet .hist{gap:4px}
+.bet .hist span{font-size:13px;border-radius:7px}
+
 /* End */
 .result{border-radius:var(--r-xl);padding:24px 20px;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
 .result .big{font-family:var(--display);font-weight:900;font-size:110px;line-height:.8;color:var(--lime);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
@@ -414,7 +475,7 @@ function renderAuction(){
 function bindHome(){ var h = document.getElementById("home"); if (h) h.onclick = function(){ go("hub"); }; }
 function renderSetup(){
   setTips("setup");
-  app.innerHTML = '<section class="view">' +
+  app.innerHTML = '<section class="view bet">' +
     '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><span class="pill">Etappe 3</span></div>' +
     '<div><h2 class="d" style="font-size:64px">Regel-</h2><p class="d tilt" style="font-size:64px;background:var(--orange)">Auktion!</p></div>' +
     '<div class="card" style="display:flex;flex-direction:column;gap:14px">' +
@@ -443,7 +504,7 @@ function renderChoose(){
   var win = Math.round(sv * q);
   var cta = !a.pick ? "Gute Regel oder Falle?" : broke ? "Tipp abgeben" : !stakeOk() ? (sv > a.balance ? "Zu viel! Max. " + eur(a.balance) : "Wählt euren Einsatz") : "Wette platzieren · " + eur(sv);
   var badges = (isBoost() ? '<span class="badge boost">⚡ Quoten-Boost</span>' : '') + (streakBonus() ? '<span class="badge fire">🔥 Serien-Bonus +' + qtxt(streakBonus()) + '</span>' : '');
-  app.innerHTML = '<section class="view">' + header() +
+  app.innerHTML = '<section class="view bet">' + header() +
     '<div class="rule"><div class="row"><span class="label">Regel ' + (a.pos + 1) + ' von ' + RULES.length + '</span>' +
       '<button class="hintbtn" id="hint" aria-pressed="' + a.hint + '" aria-label="Hilfe auf Französisch">⭐ ' + (a.hint ? 'Hilfe' : 'Hilfe?') + '</button></div>' +
       (badges ? '<div class="badges">' + badges + '</div>' : '') +
@@ -502,7 +563,7 @@ function renderReveal(animate){
   var lvNow = level(a.correct).cur[1], up = h.correct && lvNow !== h.lvBefore;
   var deltaTxt = h.stake ? (h.correct ? "Gewonnen! +" + eur(h.pay - h.stake) : "Verloren! −" + eur(h.stake)) : (h.correct ? "Richtig getippt!" : "Daneben!");
   var broke = a.balance < 5;
-  app.innerHTML = '<section class="view">' + header() +
+  app.innerHTML = '<section class="view bet">' + header() +
     '<div class="reveal ' + (r.good ? "good" : "trap") + (h.correct ? " won" : " lost") + '">' +
       '<p class="stamp">' + (r.good ? "Gute Regel!" : "Falle!") + '</p>' +
       '<p style="font-size:15px;font-weight:700">„' + esc(r.t) + '“</p>' +
@@ -539,7 +600,7 @@ function renderEnd(){
   var a = S.auction, L = level(a.correct);
   var hist = a.history.map(function(h, k){ return '<span class="' + (h.correct ? "ok" : "ko") + '">' + (k + 1) + '</span>'; }).join("");
   var gold = GOLDEN.map(function(g, i){ return '<li><b class="n">' + (i + 1) + '</b><span class="r">' + esc(g[0]) + '</span><span class="s">„' + esc(g[1]) + '“</span></li>'; }).join("");
-  app.innerHTML = '<section class="view">' +
+  app.innerHTML = '<section class="view bet">' +
     '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><span class="pill">Ergebnis</span></div>' +
     '<div class="result"><span class="label" style="color:var(--paper);opacity:.75">' + esc(a.team) + ' · ' + a.correct + ' von ' + a.played + ' richtig</span>' +
       '<p class="big">' + eur(a.balance) + '</p><p class="title">' + rank(a.balance) + '</p></div>' +
