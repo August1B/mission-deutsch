@@ -63,19 +63,6 @@ button{cursor:pointer;border:0;background:none}
 .err{font-size:14px;font-weight:700;min-height:20px}
 .fineprint{font-size:12px;color:var(--muted);text-align:center;margin-top:6px}
 
-/* Bingo */
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.back{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;padding:8px 12px 8px 4px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.cell{aspect-ratio:1/1;max-width:100%;border-radius:var(--r-lg);background:var(--card);display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;position:relative;font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.9;font-size:clamp(15px,5vw,23px);overflow-wrap:anywhere;hyphens:manual;transition:background .18s,transform .12s}
-.cell:active{transform:scale(.95)}
-.cell.on{background:var(--lime)}
-.cell.on::after{content:"";position:absolute;inset:7px;border:3px solid var(--ink);border-radius:16px;opacity:.9}
-.cell.free{background:var(--ink);color:var(--lime);pointer-events:none}
-.cell.win{background:var(--orange)}
-.hint{font-size:15px}
-.counter{font-family:var(--display);font-weight:900;font-size:22px;text-transform:uppercase}
-
 /* Auction */
 .bal{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
 .bal .v{font-family:var(--display);font-weight:900;font-size:46px;font-variant-numeric:tabular-nums}
@@ -137,7 +124,6 @@ button{cursor:pointer;border:0;background:none}
 
 /* Overlays */
 .overlay{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:calc(24px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px))}
-.overlay.bingo{background:var(--orange)}
 .overlay.raise{background:var(--lime)}
 .overlay .huge{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(96px,32vw,200px);line-height:.8}
 .overlay .sub{font-size:20px;font-weight:700;max-width:22ch}
@@ -181,32 +167,8 @@ button{cursor:pointer;border:0;background:none}
 .words b{display:block;font-size:14px;overflow-wrap:anywhere}
 .lang{height:44px;padding:0 14px;border-radius:999px;background:var(--lime);color:var(--ink);font-weight:700;font-size:14px;border:2px solid var(--ink)}
 .lang[aria-pressed="true"]{background:var(--ink);color:var(--lime)}
-/* Speed-Tandem */
-.tile.ink{background:var(--ink);color:var(--paper)}
-.tile.ink .pill{background:var(--lime);color:var(--ink)}
-.tile.ink .go{background:var(--lime);color:var(--ink)}
+/* Tiles */
 .tile.white{background:var(--card)}
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--card);border-radius:999px;padding:5px}
-.seg button{height:52px;border-radius:999px;font-family:var(--display);font-weight:900;font-size:23px;text-transform:uppercase;transition:background .15s}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--lime)}
-.seg button.du[aria-pressed="true"]{background:var(--orange);color:var(--ink)}
-.qlist{list-style:none;display:flex;flex-direction:column;gap:8px}
-.qitem{display:grid;grid-template-columns:30px 1fr 30px;align-items:center;gap:10px;width:100%;text-align:left;background:var(--card);border-radius:var(--r-lg);padding:14px 14px 14px 15px;transition:opacity .2s,background .2s}
-.qitem .n{font-family:var(--display);font-weight:900;font-size:26px;line-height:.9;color:var(--orange)}
-.qitem .q{font-weight:700;font-size:17px;line-height:1.3}
-.qitem .ck{width:28px;height:28px;border-radius:50%;border:2.5px solid var(--line);display:flex;align-items:center;justify-content:center}
-.qitem[aria-pressed="true"]{background:var(--paper);outline:2px solid var(--line)}
-.qitem[aria-pressed="true"] .q{color:var(--muted);text-decoration:line-through;text-decoration-thickness:2px}
-.qitem[aria-pressed="true"] .ck{background:var(--lime);border-color:var(--ink)}
-.alist li{background:var(--card);border-radius:var(--r-lg);padding:13px 15px;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
-.alist .n{font-family:var(--display);font-weight:900;font-size:26px;line-height:.95;color:var(--orange)}
-.alist .a{font-weight:700;font-size:16.5px;line-height:1.35}
-.korr{display:flex;flex-direction:column;gap:8px}
-.korr div{background:var(--card);border-radius:var(--r-lg);padding:12px 15px;display:flex;flex-direction:column;gap:3px}
-.korr s{color:var(--muted);text-decoration-color:var(--orange);text-decoration-thickness:2px}
-.korr b{font-size:16.5px}
-.big-say{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:34px;line-height:.92}
-
 /* Tandem-Pass */
 .opts{display:flex;flex-wrap:wrap;gap:8px}
 .opt{min-height:46px;padding:0 16px;border-radius:999px;background:var(--card);font-weight:700;font-size:15.5px;border:2px solid transparent;transition:background .15s,transform .12s}
@@ -241,7 +203,6 @@ button{cursor:pointer;border:0;background:none}
 "use strict";
 var CODE = "LENA";
 var START = 100;
-var POOL = ["Partner","Köln","kostenlos","Kultur","Disziplin","Sprach­nachricht","Video­anruf","Erasmus","Hoch­schule","Korrektur","Fehler","Rettungs­satz","regel­mäßig","Adresse","Niveau","Lena"];
 var RULES = [
   {t:"Teilt die Zeit: halb Deutsch, halb Französisch.", good:true, e:"Jeder lernt eine Sprache. 50/50 ist fair.", rs:"Können wir jetzt 15 Minuten nur Deutsch sprechen?"},
   {t:"Sprecht immer nur über das Wetter.", good:false, e:"Langweilig! Nach zwei Minuten kommt die Stille."},
@@ -259,15 +220,10 @@ var GOLDEN = [
   ["Macht Notizen und wiederholt die Wörter!","Kannst du das bitte aufschreiben?"],
   ["Trefft euch regelmäßig!","Wollen wir uns jeden Dienstag um 18 Uhr treffen?"]
 ];
-var LENA_Q = ["Hallo! Ich bin Lena aus Köln. Wie heißt du?","Wo wohnst du?","Warum lernst du Deutsch?","Was machst du gern in deiner Freizeit?","Wann hast du Zeit für ein Tandem?"];
-var BONUS = ["Was möchtest du im Tandem lernen?","Hast du Geschwister?","Was ist dein Lieblingsessen?","Warst du schon in Deutschland?"];
-var KORR = [["Ich habe 19 Jahre.","Ich bin 19 Jahre alt."],["Ich mag spielen Fußball.","Ich spiele gern Fußball."],["Ich bin Student in Rennes.","Ich studiere in Rennes."],["Ich lerne Deutsch für 5 Jahre.","Ich lerne seit 5 Jahren Deutsch."]];
-var ANTW = ["Ich heiße … Ich bin … Jahre alt.","Ich wohne in Rennes.","Ich lerne Deutsch, weil ich in Deutschland arbeiten möchte / weil ich reisen möchte / weil es mir gefällt.","In meiner Freizeit spiele ich gern … / höre ich gern Musik / koche ich gern.","Ich habe am Montagabend / am Wochenende Zeit."];
 var ZIELE = [["Erasmus","Ich möchte mit Erasmus nach Deutschland."],["Reisen","Ich möchte in Deutschland reisen."],["Arbeit","Ich möchte später in Deutschland arbeiten."],["Freunde","Ich möchte neue Freunde finden."]];
 var PLATS = ["Tandem","HelloTalk","Conversation Exchange","Vor Ort"];
 var TAGE = [["Mo","Montag"],["Di","Dienstag"],["Mi","Mittwoch"],["Do","Donnerstag"],["Fr","Freitag"],["Sa","Samstag"],["So","Sonntag"]];
 var MAG = ["Musik","Sport","Filme","Fußball","Reisen","Videospiele"];
-var LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 var KEY = "mission-deutsch-v1";
 var STAR = '<svg class="star" viewBox="0 0 84 84" aria-hidden="true"><g fill="currentColor"><rect x="36" y="0" width="12" height="84" rx="6"/><rect x="36" y="0" width="12" height="84" rx="6" transform="rotate(45 42 42)"/><rect x="36" y="0" width="12" height="84" rx="6" transform="rotate(90 42 42)"/><rect x="36" y="0" width="12" height="84" rx="6" transform="rotate(135 42 42)"/></g></svg>';
 var ARROW = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
@@ -276,19 +232,15 @@ var UP = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="cu
 var DOWN = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>';
 
 function fresh(){
-  var words = POOL.slice();
-  for (var i = words.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = words[i]; words[i] = words[j]; words[j] = t; }
-  var cells = words.slice(0, 8); cells.splice(4, 0, "Camille");
-  return {view:"hub", bingo:{cells:cells, on:[false,false,false,false,true,false,false,false,false], lines:0},
+  return {view:"hub",
     auction:{unlocked:false, team:"", started:false, balance:START, round:0, phase:"choose", pick:null, stake:null, history:[], done:false},
-    speed:freshSpeed(), pass:freshPass()};
+    pass:freshPass()};
 }
-function freshSpeed(){ return {role:"lena", asked:[]}; }
 function freshPass(){ return {name:"", ziel:null, plat:null, mal:null, tag:null, mag:"", done:false, side:"front"}; }
 var S;
 try { S = JSON.parse(localStorage.getItem(KEY)); } catch (e) { S = null; }
-if (!S || !S.bingo || !S.auction) S = fresh();
-if (!S.speed) S.speed = freshSpeed();
+if (!S || !S.auction) S = fresh();
+if (S.view === "bingo" || S.view === "speed") S.view = "hub";
 if (!S.pass) S.pass = freshPass();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 var app = document.getElementById("app");
@@ -299,9 +251,7 @@ function go(v){ S.view = v; save(); render(); window.scrollTo(0, 0); }
 
 function render(){
   var v = S.view;
-  if (v === "bingo") return renderBingo();
   if (v === "auction") return renderAuction();
-  if (v === "speed") return renderSpeed();
   if (v === "pass") return renderPass();
   renderHub();
 }
@@ -318,16 +268,12 @@ function renderHub(){
     '<div class="hero"><span class="pill" style="align-self:flex-start">POD Sprachen 2.0 · Augustin &amp; Felix</span>' +
     '<h1 class="d">Mission</h1><p class="d tilt" style="align-self:flex-start">Deutsch!</p>' +
     '<span class="ast" style="color:var(--orange)">' + STAR + '</span></div>' +
-    '<button class="tile lime" id="openB"><span class="pill">Die ganze Präsentation</span><h2 class="d">Tandem-<br>Bingo</h2><p>Hört gut zu! Tippt auf ein Wort, wenn ihr es hört. Drei in einer Reihe: Bingo!</p><span class="go">' + (S.bingo.lines ? S.bingo.lines + ' × Bingo · weiter' : 'Spielen') + ARROW + '</span></button>' +
-    '<button class="tile ink" id="openS"><span class="pill">Etappe 2 · Kennenlernen</span><h2 class="d">Speed-<br>Tandem</h2><p>Zu zweit, ein Handy. Wer ist Lena? Die Fragen und Antworten stehen hier.</p><span class="go">Öffnen' + ARROW + '</span></button>' +
     aTile +
     '<button class="tile white" id="openP"><span class="pill">Letzte Etappe</span><h2 class="d">Tandem-<br>Pass</h2><p>' + (S.pass.done ? 'Dein Pass ist fertig. Zeig ihn!' : 'Tippen statt schreiben: Plattform, Rhythmus, Ziel. Die App schreibt deine erste Nachricht.') + '</p><span class="go">' + (S.pass.done ? 'Ansehen' : 'Erstellen') + ARROW + '</span></button>' +
     '<p class="fineprint">Simulation · Camille und Lena sind erfunden. Kein Konto, keine Daten: alles bleibt auf diesem Handy.</p>' +
     '<button class="textbtn" id="reset" style="align-self:center">' + (resetArmed ? 'Wirklich alles löschen? Noch einmal tippen.' : 'Neu starten') + '</button>' +
     '</section>';
-  document.getElementById("openB").onclick = function(){ go("bingo"); };
   var oa = document.getElementById("openA"); if (oa) oa.onclick = function(){ go("auction"); };
-  document.getElementById("openS").onclick = function(){ go("speed"); };
   document.getElementById("openP").onclick = function(){ go("pass"); };
   var f = document.getElementById("lockForm");
   if (f) f.onsubmit = function(ev){
@@ -342,42 +288,6 @@ function renderHub(){
   };
 }
 
-/* ---------- Bingo ---------- */
-function countLines(on){ var n = 0, w = {}; LINES.forEach(function(l){ if (on[l[0]] && on[l[1]] && on[l[2]]) { n++; l.forEach(function(i){ w[i] = 1; }); } }); return {n:n, w:w}; }
-function renderBingo(){
-  setTips("bingo");
-  var b = S.bingo, L = countLines(b.on);
-  var cells = b.cells.map(function(w, i){
-    var free = i === 4;
-    var cls = "cell" + (free ? " free" : "") + (b.on[i] && !free ? " on" : "") + (L.w[i] && !free ? " win" : "");
-    return '<button class="' + cls + '" data-i="' + i + '" aria-pressed="' + (b.on[i] ? "true" : "false") + '">' + (free ? '<span style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:26px;height:26px;color:var(--lime)">' + STAR + '</span>Camille</span>' : esc(w)) + '</button>';
-  }).join("");
-  var marked = b.on.filter(Boolean).length - 1;
-  app.innerHTML = '<section class="view">' +
-    '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><span class="pill">Tandem-Bingo</span></div>' +
-    '<div><h2 class="d" style="font-size:60px">Hört gut</h2><p class="d tilt" style="font-size:60px;background:var(--lime)">zu!</p></div>' +
-    '<p class="hint">Augustin oder Felix sagt ein Wort von eurer Karte? Tippt darauf. Drei in einer Reihe, Spalte oder diagonal: Ruft laut <b>„Bingo!“</b></p>' +
-    '<div class="grid">' + cells + '</div>' +
-    '<div class="row"><span class="counter">' + marked + ' / 8 Wörter</span><span class="counter" style="color:var(--orange)">' + (L.n ? L.n + ' × Bingo' : '') + '</span></div>' +
-    '<p class="fineprint">Falsch getippt? Noch einmal tippen.</p>' +
-    '</section>';
-  document.getElementById("home").onclick = function(){ go("hub"); };
-  Array.prototype.forEach.call(app.querySelectorAll(".cell"), function(el){
-    el.onclick = function(){
-      var i = +el.getAttribute("data-i"); if (i === 4) return;
-      b.on[i] = !b.on[i]; buzz(12);
-      var n = countLines(b.on).n, before = b.lines; b.lines = n; save(); renderBingo();
-      if (n > before) showBingo();
-    };
-  });
-}
-function showBingo(){
-  buzz([80,60,80,60,200]); confetti();
-  var o = document.createElement("div"); o.className = "overlay bingo"; o.setAttribute("role", "dialog"); o.setAttribute("aria-label", "Bingo");
-  o.innerHTML = '<span class="pill">Tandem-Bingo</span><p class="huge">Bingo!</p><p class="sub">Steht auf und ruft laut: „Bingo!“ Wir schreiben euren Namen auf.</p><button class="btn" id="closeO">Weiterspielen</button>';
-  document.body.appendChild(o);
-  document.getElementById("closeO").onclick = function(){ o.remove(); };
-}
 function confetti(){
   var c = document.createElement("div"); c.className = "confetti";
   var cols = ["var(--lime)","var(--ink)","var(--card)","var(--orange)"];
@@ -545,42 +455,6 @@ function renderEnd(){
   };
 }
 
-/* ---------- Speed-Tandem ---------- */
-function renderSpeed(){
-  var sp = S.speed, lena = sp.role === "lena";
-  setTipsLater(lena ? "speedLena" : "speedDu");
-  var body;
-  if (lena) {
-    var qs = LENA_Q.map(function(q, i){ var on = sp.asked.indexOf(i) > -1; return '<li><button class="qitem" data-q="' + i + '" aria-pressed="' + on + '"><b class="n">' + (i + 1) + '</b><span class="q">' + esc(q) + '</span><span class="ck" aria-hidden="true">' + (on ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>' : '') + '</span></button></li>'; }).join("");
-    var bs = BONUS.map(function(q, i){ var k = 10 + i, on = sp.asked.indexOf(k) > -1; return '<li><button class="qitem" data-q="' + k + '" aria-pressed="' + on + '"><b class="n" style="color:var(--muted)">+</b><span class="q">' + esc(q) + '</span><span class="ck" aria-hidden="true">' + (on ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>' : '') + '</span></button></li>'; }).join("");
-    var kr = KORR.map(function(k){ return '<div><s>' + esc(k[0]) + '</s><b>→ ' + esc(k[1]) + '</b></div>'; }).join("");
-    body = '<div class="card" style="background:var(--lime)"><p style="font-size:16px"><b>Du bist Lena aus Köln.</b> Du sprichst Deutsch und lernst Französisch. Du stellst die Fragen und korrigierst <b>einen</b> Fehler.</p></div>' +
-      '<p class="label">Deine Fragen · tippen, wenn gefragt</p><ol class="qlist">' + qs + '</ol>' +
-      '<div class="rs"><span class="label">Deine Korrektur</span><p class="big-say">„Kleine Korrektur: Man sagt …“</p></div>' +
-      '<p class="label">Wenn dein Partner sagt …</p><div class="korr">' + kr + '</div>' +
-      '<p class="label">Schon fertig? Bonusfragen</p><ol class="qlist">' + bs + '</ol>';
-  } else {
-    var an = ANTW.map(function(a, i){ return '<li><b class="n">' + (i + 1) + '</b><span class="a">' + esc(a) + '</span></li>'; }).join("");
-    body = '<div class="card" style="background:var(--orange)"><p style="font-size:16px"><b>Du bist du selbst.</b> Lena fragt, du antwortest. Diese Sätze helfen dir.</p></div>' +
-      '<p class="label">Deine Antworten</p><ol class="qlist alist">' + an + '</ol>' +
-      '<div class="rs"><span class="label" style="color:var(--orange)">Frag zurück</span><p class="big-say">„Und du?“</p></div>' +
-      '<div class="card" style="background:var(--lime)"><p class="label" style="color:var(--ink)">Du verstehst nicht?</p><p class="big-say" style="margin-top:6px">„Kannst du das bitte wiederholen?“</p></div>';
-  }
-  app.innerHTML = '<section class="view">' +
-    '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><span class="pill">Etappe 2 · Kennenlernen</span></div>' +
-    '<div><h2 class="d" style="font-size:60px">Speed-</h2><p class="d tilt" style="font-size:60px;background:var(--orange)">Tandem!</p></div>' +
-    '<div class="seg" role="group" aria-label="Rolle"><button id="rL" aria-pressed="' + lena + '">Ich bin Lena</button><button id="rD" class="du" aria-pressed="' + !lena + '">Ich bin ich</button></div>' +
-    body +
-    '<p class="fineprint" style="text-align:left">Runde 2: neuer Partner, neue Rollen. Wer jetzt Lena ist, tippt oben auf „Ich bin Lena“.</p>' +
-    '</section>';
-  bindHome();
-  document.getElementById("rL").onclick = function(){ if (sp.role !== "lena") { sp.role = "lena"; sp.asked = []; buzz(10); save(); renderSpeed(); } };
-  document.getElementById("rD").onclick = function(){ if (sp.role !== "du") { sp.role = "du"; buzz(10); save(); renderSpeed(); } };
-  Array.prototype.forEach.call(app.querySelectorAll(".qitem"), function(el){
-    el.onclick = function(){ var k = +el.getAttribute("data-q"), p = sp.asked.indexOf(k); if (p > -1) sp.asked.splice(p, 1); else sp.asked.push(k); buzz(10); save(); var y = window.scrollY; renderSpeed(); window.scrollTo(0, y); };
-  });
-}
-
 /* ---------- Tandem-Pass ---------- */
 function zielSatz(z){ for (var i = 0; i < ZIELE.length; i++) if (ZIELE[i][0] === z) return ZIELE[i][1]; return ""; }
 function tagName(t){ for (var i = 0; i < TAGE.length; i++) if (TAGE[i][0] === t) return TAGE[i][1]; return ""; }
@@ -655,24 +529,11 @@ function setTipsLater(k){ setTips(k); }
 var TIPS = {
   hub: {t:"So funktioniert's", sub:"Die Mission-Deutsch-App", tFr:"Mode d'emploi", subFr:"L'app Mission Deutsch", tips:[
     ["Lasst die App die ganze Präsentation offen. Kein Papier, kein Stift: Alles ist hier.", "Gardez l'app ouverte toute la présentation. Ni papier ni stylo : tout est ici."],
-    ["Die Reihenfolge: Bingo, Speed-Tandem, Regel-Auktion, Tandem-Pass.", "L'ordre : Bingo, Speed-Tandem, Regel-Auktion, Tandem-Pass."],
-    ["Bingo und Tandem-Pass: jeder allein. Speed-Tandem und Regel-Auktion: ein Handy pro Tandem.", "Bingo et Tandem-Pass : chacun seul. Speed-Tandem et Regel-Auktion : un téléphone par binôme."],
+    ["Zwei Spiele: zuerst die Regel-Auktion, dann der Tandem-Pass.", "Deux jeux : d'abord la Regel-Auktion, puis le Tandem-Pass."],
+    ["Regel-Auktion: ein Handy pro Tandem. Tandem-Pass: jeder allein.", "Regel-Auktion : un téléphone par binôme. Tandem-Pass : chacun seul."],
     ["Die Regel-Auktion ist gesperrt. Den Code sagen Augustin und Felix.", "La Regel-Auktion est verrouillée ; le code est donné à l'oral."],
     ["Kein Handy? Spielt mit eurem Nachbarn.", "Pas de téléphone ? Jouez avec votre voisin."],
     ["Stellt euer Handy auf lautlos. Die App speichert alles auf eurem Handy.", "Mettez le téléphone en silencieux ; tout reste enregistré dessus."]]},
-  speedLena: {t:"Du bist Lena", sub:"Speed-Tandem", tFr:"Vous êtes Lena", subFr:"Speed-Tandem", tips:[
-    ["Lena kommt aus Köln. Stellt die Fragen der Reihe nach.", "Lena vient de Cologne : posez les questions dans l'ordre."],
-    ["Frage gestellt? Tippt darauf, dann seht ihr, wo ihr seid.", "Question posée ? Touchez-la pour la cocher."],
-    ["Ein Fehler? Korrigiert genau einen, freundlich: „Kleine Korrektur: Man sagt …“", "Corrigez une seule erreur, gentiment."],
-    ["Schon fertig vor dem Stopp? Unten stehen Bonusfragen.", "Fini avant le Stopp ? Les questions bonus sont en bas."],
-    ["Runde 2: Wer rechts sitzt, ist jetzt Lena und tippt oben auf „Ich bin Lena“.", "Tour 2 : la personne de droite devient Lena."]],
-    phrases:[["Kleine Korrektur: Man sagt …","Petite correction : on dit …"],["Super! Und warum?","Super ! Et pourquoi ?"],["Kannst du das bitte wiederholen?","Tu peux répéter, s'il te plaît ?"]]},
-  speedDu: {t:"Du bist du", sub:"Speed-Tandem", tFr:"Vous êtes vous-même", subFr:"Speed-Tandem", tips:[
-    ["Lena fragt, ihr antwortet. Die Sätze in der App helfen euch.", "Lena pose les questions ; les phrases de l'app vous aident."],
-    ["Kurze Antworten sind okay. Sprechen ist wichtiger als perfekt sein.", "Les réponses courtes sont OK : parler compte plus que la perfection."],
-    ["Fragt zurück: „Und du?“", "Retournez la question : « Und du? »."],
-    ["Lena korrigiert euch? Sagt den Satz noch einmal richtig.", "Lena vous corrige ? Répétez la phrase correcte."]],
-    phrases:[["Und du?","Et toi ?"],["Kannst du das bitte wiederholen?","Tu peux répéter, s'il te plaît ?"],["Langsam, bitte.","Plus lentement, s'il te plaît."],["Wie sagt man … auf Deutsch?","Comment dit-on … en allemand ?"]]},
   pass: {t:"Dein Tandem-Pass", sub:"Jetzt seid ihr Camille", tFr:"Votre Tandem-Pass", subFr:"Vous êtes Camille", tips:[
     ["Tippt eure Antworten. Schreiben müsst ihr nur euren Vornamen.", "Touchez vos réponses ; seul le prénom est à taper."],
     ["Die App schreibt eure erste Nachricht automatisch.", "L'app rédige votre premier message toute seule."],
@@ -684,13 +545,6 @@ var TIPS = {
     ["Tippt auf „Rückseite“: die 5 goldenen Regeln.", "Touchez « Rückseite » : les 5 règles d'or."],
     ["Sicherheit: keine Adresse, keine Telefonnummer, kein Geld.", "Sécurité : ni adresse, ni téléphone, ni argent."],
     ["Probiert diese Woche eine Plattform aus!", "Essayez une plateforme cette semaine !"]]},
-  bingo: {t:"Bingo-Tipps", sub:"Hört gut zu!", tFr:"Conseils Bingo", subFr:"Écoutez bien !", tips:[
-    ["Hört auf Augustin und Felix. Ihr Wort ist auf eurer Karte? Tippt darauf!", "Un mot de votre grille est prononcé ? Touchez-le."],
-    ["Falsch getippt? Einfach noch einmal tippen.", "Erreur ? Touchez une deuxième fois."],
-    ["Drei in einer Reihe, Spalte oder diagonal: Bingo!", "Trois alignés, en ligne, colonne ou diagonale."],
-    ["Camille in der Mitte ist schon gratis.", "La case Camille au centre est offerte."],
-    ["Bingo? Steht auf und ruft laut: „Bingo!“", "Levez-vous et criez « Bingo! »."]],
-    words:[["Partner","partenaire"],["kostenlos","gratuit"],["Kultur","culture"],["Disziplin","discipline"],["Sprachnachricht","message vocal"],["Videoanruf","appel vidéo"],["Hochschule","école, université"],["Erasmus","échange Erasmus"],["Korrektur","correction"],["Fehler","erreur"],["Rettungssatz","phrase de secours"],["regelmäßig","régulièrement"],["Adresse","adresse"],["Niveau","niveau"],["Köln","Cologne"],["Lena","la partenaire de Camille"]]},
   setup: {t:"Vor dem Start", sub:"Regel-Auktion", tFr:"Avant de commencer", subFr:"Regel-Auktion", tips:[
     ["Ein Handy pro Tandem. Setzt euch nebeneinander.", "Un téléphone par binôme, côte à côte."],
     ["Findet einen lustigen Team-Namen!", "Trouvez un nom d'équipe drôle."],
