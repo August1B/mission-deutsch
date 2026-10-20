@@ -108,6 +108,54 @@ button{cursor:pointer;border:0;background:none}
 .rs p{font-size:19px;font-weight:700;line-height:1.3}
 .broke{background:var(--card);border-radius:var(--r-lg);padding:14px 16px;font-size:14.5px}
 
+/* Wett-App */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
+.back{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 14px 0 10px;border-radius:999px;background:var(--card);font-weight:700;font-size:15px;flex:none}
+.stat{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;background:var(--card);border-radius:999px;padding:8px 10px 8px 14px}
+.stat .lv{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
+.stat .bar{height:8px;border-radius:9px;background:var(--line);overflow:hidden;display:block}
+.stat .bar i{display:block;height:100%;background:var(--ink);border-radius:9px;transition:width .5s}
+.stat .streak{font-weight:700;font-size:14px;border-radius:999px;padding:4px 10px;background:var(--paper);font-variant-numeric:tabular-nums}
+.stat .streak.hot{background:var(--orange);animation:pulse2 1s infinite}
+@keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.hintbtn{height:38px;padding:0 14px;border-radius:999px;background:var(--paper);font-weight:700;font-size:14px;border:2px solid var(--ink)}
+.hintbtn[aria-pressed="true"]{background:var(--ink);color:var(--lime)}
+.hintbox{background:var(--paper);border-radius:var(--r-md);padding:12px 14px;font-size:15px;line-height:1.4;display:flex;flex-direction:column;gap:4px;animation:in .25s}
+.hintbox b{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+.hintbox span{font-size:12px;font-weight:700;color:var(--orange)}
+.badges{display:flex;flex-wrap:wrap;gap:6px}
+.badge{border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+.badge.boost{background:var(--lime);border:2px solid var(--ink);animation:pulse2 1s infinite}
+.badge.fire{background:var(--orange)}
+.pick .odd{font-family:var(--display);font-weight:900;font-size:34px;line-height:1;font-variant-numeric:tabular-nums;background:var(--paper);border-radius:12px;padding:6px 12px 2px;align-self:stretch;text-align:center}
+.pick[aria-pressed="true"] .odd{background:var(--ink);color:var(--paper)}
+.slip{background:var(--card);border-radius:var(--r-xl);padding:16px;display:flex;flex-direction:column;gap:12px;border:2px dashed var(--line)}
+.slip .label b{color:var(--ink);font-size:15px}
+.chips{grid-template-columns:repeat(5,1fr)!important}
+.chip{background:var(--paper)!important;height:52px!important;font-size:22px!important}
+.chip[aria-pressed="true"]{background:var(--ink)!important;color:var(--lime)}
+.chip.allin{font-size:15px!important}
+.chip.allin[aria-pressed="true"]{background:var(--orange)!important;color:var(--ink)}
+.custom{display:grid;grid-template-columns:52px 1fr auto 52px;align-items:center;gap:8px;background:var(--paper);border-radius:999px;padding:4px}
+.custom input{height:48px;border:0;background:transparent;text-align:center;font-family:var(--display);font-weight:900;font-size:26px;min-width:0;width:100%}
+.custom input::placeholder{font-family:var(--body);font-weight:500;font-size:15px;color:var(--muted)}
+.custom .eu{font-weight:700}
+.stp{width:48px;height:48px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:26px;font-weight:700;line-height:1}
+.win{border-top:2px solid var(--line);padding-top:10px;font-weight:700}
+.win b{font-family:var(--display);font-weight:900;font-size:30px;color:var(--ink);font-variant-numeric:tabular-nums}
+.calc{font-weight:700;font-size:16px}
+.frx{background:rgba(255,255,255,.55);border-radius:var(--r-md);padding:10px 14px}
+.frx summary{font-weight:700;cursor:pointer}
+.frx p{margin-top:6px;font-size:15px}
+.note{border-radius:var(--r-lg);padding:14px 16px;font-weight:700;font-size:15.5px;background:var(--card)}
+.note.hot{background:var(--orange)}
+.note.lvup{background:var(--ink);color:var(--lime)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpis div{background:var(--card);border-radius:var(--r-lg);padding:12px 10px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.kpis b{font-family:var(--display);font-weight:900;font-size:22px;line-height:1;overflow-wrap:anywhere}
+.kpis span{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.hist{grid-template-columns:repeat(8,1fr)}
+
 /* End */
 .result{border-radius:var(--r-xl);padding:24px 20px;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
 .result .big{font-family:var(--display);font-weight:900;font-size:110px;line-height:.8;color:var(--lime);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
@@ -204,15 +252,32 @@ button{cursor:pointer;border:0;background:none}
 var CODE = "LENA";
 var START = 100;
 var RULES = [
-  {t:"Teilt die Zeit: halb Deutsch, halb Französisch.", good:true, e:"Jeder lernt eine Sprache. 50/50 ist fair.", rs:"Können wir jetzt 15 Minuten nur Deutsch sprechen?"},
-  {t:"Sprecht immer nur über das Wetter.", good:false, e:"Langweilig! Nach zwei Minuten kommt die Stille."},
-  {t:"Bereitet für jedes Gespräch ein Thema vor.", good:true, e:"Mit einem Thema gibt es keine Stille.", rs:"Heute möchte ich über Musik sprechen."},
-  {t:"Ihr habt einen Fehler gemacht? Dann sagt lieber nichts mehr.", good:false, e:"Fehler sind normal. Wer spricht, lernt!"},
-  {t:"Fragt euren Partner nach Korrekturen.", good:true, e:"Euer Partner ist zu nett? Fragt ihn!", rs:"Kannst du mich bitte korrigieren?"},
-  {t:"Euer Partner antwortet nicht? Schreibt ihm zehn Nachrichten pro Tag!", good:false, e:"Zu viel Druck! Schlagt lieber einen festen Termin vor."},
-  {t:"Macht Notizen und wiederholt die neuen Wörter.", good:true, e:"Sonst ist nach einer Woche alles vergessen.", rs:"Kannst du das bitte aufschreiben?"},
-  {t:"Trefft euch regelmäßig, zum Beispiel jeden Dienstag.", good:true, e:"Regelmäßig ist besser als lang.", rs:"Wollen wir uns jeden Dienstag um 18 Uhr treffen?"}
+  {t:"Teilt die Zeit: halb Deutsch, halb Französisch.", good:true, q:1.4, h:"Partagez le temps : moitié allemand, moitié français.", e:"Jeder lernt eine Sprache. 50/50 ist fair.", rs:"Können wir jetzt 15 Minuten nur Deutsch sprechen?"},
+  {t:"Sprecht immer nur über das Wetter.", good:false, q:1.6, h:"Parlez toujours uniquement de la météo.", e:"Langweilig! Nach zwei Minuten kommt die Stille."},
+  {t:"Bereitet für jedes Gespräch ein Thema vor.", good:true, q:1.5, h:"Préparez un sujet pour chaque conversation.", e:"Mit einem Thema gibt es keine Stille.", rs:"Heute möchte ich über Musik sprechen."},
+  {t:"Ihr habt einen Fehler gemacht? Dann sagt lieber nichts mehr.", good:false, q:1.8, h:"Vous avez fait une faute ? Alors mieux vaut ne plus rien dire.", e:"Fehler sind normal. Wer spricht, lernt!"},
+  {t:"Fragt euren Partner nach Korrekturen.", good:true, q:1.7, h:"Demandez à votre partenaire de vous corriger.", e:"Euer Partner ist zu nett? Fragt ihn!", rs:"Kannst du mich bitte korrigieren?"},
+  {t:"Euer Partner antwortet nicht? Schreibt ihm zehn Nachrichten pro Tag!", good:false, q:1.5, h:"Votre partenaire ne répond pas ? Envoyez-lui dix messages par jour !", e:"Zu viel Druck! Schlagt lieber einen festen Termin vor."},
+  {t:"Macht Notizen und wiederholt die neuen Wörter.", good:true, q:1.6, h:"Prenez des notes et révisez les nouveaux mots.", e:"Sonst ist nach einer Woche alles vergessen.", rs:"Kannst du das bitte aufschreiben?"},
+  {t:"Trefft euch regelmäßig, zum Beispiel jeden Dienstag.", good:true, q:1.4, h:"Retrouvez-vous régulièrement, par exemple chaque mardi.", e:"Regelmäßig ist besser als lang.", rs:"Wollen wir uns jeden Dienstag um 18 Uhr treffen?"},
+  {t:"Sprecht nur Französisch. Das ist einfacher.", good:false, q:1.3, h:"Ne parlez que français. C'est plus simple.", e:"Einfacher, ja. Aber dann lernt ihr kein Deutsch!"},
+  {t:"Ihr versteht etwas nicht? Sagt es ehrlich.", good:true, q:2.2, h:"Vous ne comprenez pas quelque chose ? Dites-le honnêtement.", e:"So hilft euch euer Partner. Niemand versteht alles.", rs:"Kannst du das bitte wiederholen?"},
+  {t:"Benutzt für jeden Satz den Übersetzer.", good:false, q:2.4, h:"Utilisez le traducteur pour chaque phrase.", e:"Ab und zu ist okay. Aber immer? Dann sprecht ihr nicht selbst."},
+  {t:"Bittet euren Partner: langsam und mit einfachen Sätzen.", good:true, q:2.0, h:"Demandez à votre partenaire de parler lentement, avec des phrases simples.", e:"Am Anfang ist das normal. Euer Partner versteht das.", rs:"Langsam, bitte."},
+  {t:"Trefft euch einmal im Jahr, dafür fünf Stunden lang.", good:false, q:2.1, h:"Retrouvez-vous une fois par an, mais pendant cinq heures.", e:"Zu lang und zu selten. Lieber jede Woche 30 Minuten."},
+  {t:"Schickt euch auch Sprachnachrichten.", good:true, q:2.6, h:"Envoyez-vous aussi des messages vocaux.", e:"So übt ihr Sprechen und Hören, auch ohne Termin.", rs:"Ich schicke dir eine Sprachnachricht."},
+  {t:"Euer Partner korrigiert jeden Fehler, sofort, in jedem Satz.", good:false, q:2.8, h:"Votre partenaire corrige chaque faute, tout de suite, dans chaque phrase.", e:"Zu viel! Dann habt ihr Angst zu sprechen. Lieber nur die wichtigen Fehler."},
+  {t:"Sagt am Anfang euer Ziel.", good:true, q:2.3, h:"Dites votre objectif dès le début.", e:"Mit einem Ziel weiß euer Partner, was ihr braucht.", rs:"Mein Ziel ist Erasmus in Deutschland."},
+  {t:"Euer Partner fragt nach Geld? Schickt es ihm!", good:false, q:1.9, h:"Votre partenaire vous demande de l'argent ? Envoyez-le-lui !", e:"Niemals! Ein echter Tandem-Partner fragt nie nach Geld. Blockieren und melden!"},
+  {t:"Korrigiert freundlich und nur die wichtigen Fehler.", good:true, q:2.7, h:"Corrigez gentiment, et seulement les fautes importantes.", e:"So bleibt das Gespräch locker und man lernt trotzdem.", rs:"Kleiner Tipp: Man sagt …"},
+  {t:"Lest im Gespräch nur Sätze aus dem Schulbuch vor.", good:false, q:2.5, h:"Pendant la conversation, lisez seulement des phrases du manuel.", e:"Das ist kein Gespräch. Sprecht frei, auch mit Fehlern."},
+  {t:"Gebt am Anfang keine privaten Daten: keine Adresse, keine Telefonnummer.", good:true, q:3.0, h:"Au début, ne donnez pas de données privées : ni adresse, ni numéro de téléphone.", e:"Sicherheit zuerst! Bleibt am Anfang in der App.", rs:"Lass uns erst mal in der App schreiben."},
+  {t:"Keine Lust mehr? Brecht den Kontakt ohne Nachricht ab.", good:false, q:2.2, h:"Plus envie ? Coupez le contact sans prévenir.", e:"Unhöflich! Eine kurze Nachricht ist fair."},
+  {t:"Ihr habt keine Zeit? Sagt eurem Partner früh Bescheid.", good:true, q:1.8, h:"Vous n'avez pas le temps ? Prévenez votre partenaire à l'avance.", e:"Das ist respektvoll. So bleibt das Tandem stabil.", rs:"Tut mir leid, ich kann heute nicht. Geht es morgen?"},
+  {t:"Fragt euren Partner auch nach seiner Kultur.", good:true, q:2.9, h:"Interrogez aussi votre partenaire sur sa culture.", e:"Ein Tandem ist mehr als Grammatik. Ihr lernt das Land kennen!", rs:"Was macht man in Köln am Wochenende?"},
+  {t:"Feiert kleine Erfolge, zum Beispiel ein Gespräch ohne Übersetzer.", good:true, q:2.4, h:"Fêtez les petites victoires, par exemple une conversation sans traducteur.", e:"Kleine Erfolge motivieren. So macht ihr lange weiter.", rs:"Heute habe ich alles verstanden!"}
 ];
+var LEVELS = [[0,"Anfänger"],[3,"Lernender"],[7,"Profi"],[12,"Tandem-Champion"],[18,"Legende"]];
 var GOLDEN = [
   ["Teilt die Zeit, 50/50!","Können wir jetzt 15 Minuten nur Deutsch sprechen?"],
   ["Fragt nach Korrekturen!","Kannst du mich bitte korrigieren?"],
@@ -224,7 +289,7 @@ var ZIELE = [["Erasmus","Ich möchte mit Erasmus nach Deutschland."],["Reisen","
 var PLATS = ["Tandem","HelloTalk","Conversation Exchange","Vor Ort"];
 var TAGE = [["Mo","Montag"],["Di","Dienstag"],["Mi","Mittwoch"],["Do","Donnerstag"],["Fr","Freitag"],["Sa","Samstag"],["So","Sonntag"]];
 var MAG = ["Musik","Sport","Filme","Fußball","Reisen","Videospiele"];
-var KEY = "mission-deutsch-v1";
+var KEY = "mission-deutsch-v2";
 var STAR = '<svg class="star" viewBox="0 0 84 84" aria-hidden="true"><g fill="currentColor"><rect x="36" y="0" width="12" height="84" rx="6"/><rect x="36" y="0" width="12" height="84" rx="6" transform="rotate(45 42 42)"/><rect x="36" y="0" width="12" height="84" rx="6" transform="rotate(90 42 42)"/><rect x="36" y="0" width="12" height="84" rx="6" transform="rotate(135 42 42)"/></g></svg>';
 var ARROW = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 var BACK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
@@ -232,14 +297,12 @@ var UP = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="cu
 var DOWN = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>';
 
 function fresh(){
-  return {view:"hub",
-    auction:{unlocked:false, team:"", started:false, balance:START, round:0, phase:"choose", pick:null, stake:null, history:[], done:false},
-    pass:freshPass()};
+  return {view:"hub", auction:freshAuction(false), pass:freshPass()};
 }
 function freshPass(){ return {name:"", ziel:null, plat:null, mal:null, tag:null, mag:"", done:false, side:"front"}; }
 var S;
 try { S = JSON.parse(localStorage.getItem(KEY)); } catch (e) { S = null; }
-if (!S || !S.auction) S = fresh();
+if (!S || !S.auction || !S.auction.order) S = fresh();
 if (S.view === "bingo" || S.view === "speed") S.view = "hub";
 if (!S.pass) S.pass = freshPass();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
@@ -262,7 +325,7 @@ function renderHub(){
   setTips("hub");
   var a = S.auction;
   var aTile = a.unlocked
-    ? '<button class="tile orange" id="openA"><span class="pill">Etappe 3 · Durchhalten</span><h2 class="d">Regel-<br>Auktion</h2><p>' + (a.done ? 'Euer Ergebnis: <b>' + eur(a.balance) + '</b>' : a.started ? 'Weiterspielen: Regel ' + (a.round + 1) + ' von 8' : 'Zu zweit spielen. 100 € Startgeld. Gute Regel oder Falle?') + '</p><span class="go">' + (a.started ? 'Weiter' : 'Starten') + ARROW + '</span></button>'
+    ? '<button class="tile orange" id="openA"><span class="pill">Etappe 3 · Durchhalten</span><h2 class="d">Regel-<br>Auktion</h2><p>' + (a.done ? 'Euer Ergebnis: <b>' + eur(a.balance) + '</b>' : a.started ? 'Weiterspielen: Regel ' + (a.pos + 1) + ' von ' + RULES.length + ' · ' + eur(a.balance) : 'Die Wett-App: 100 € Startgeld, ' + RULES.length + ' Regeln. Gute Regel oder Falle?') + '</p><span class="go">' + (a.started ? 'Weiter' : 'Starten') + ARROW + '</span></button>'
     : '<div class="tile orange"><span class="pill">Etappe 3 · Durchhalten</span><h2 class="d">Regel-<br>Auktion</h2><p>Gesperrt. Augustin und Felix geben euch den Code.</p><form class="lock" id="lockForm" autocomplete="off"><input id="code" name="code" inputmode="text" autocapitalize="characters" spellcheck="false" placeholder="CODE" aria-label="Code"><button type="submit">Öffnen</button></form><p class="err" id="err" role="alert"></p></div>';
   app.innerHTML = '<section class="view">' +
     '<div class="hero"><span class="pill" style="align-self:flex-start">POD Sprachen 2.0 · Augustin &amp; Felix</span>' +
@@ -284,7 +347,7 @@ function renderHub(){
   };
   document.getElementById("reset").onclick = function(){
     if (!resetArmed) { resetArmed = true; renderHub(); setTimeout(function(){ if (resetArmed) { resetArmed = false; if (S.view === "hub") renderHub(); } }, 4000); return; }
-    resetArmed = false; S = fresh(); save(); renderHub();
+    resetArmed = false; var u = S.auction.unlocked; S = fresh(); S.auction.unlocked = u; save(); renderHub();
   };
 }
 
@@ -304,25 +367,48 @@ function confetti(){
   document.body.appendChild(c); setTimeout(function(){ c.remove(); }, 3800);
 }
 
-/* ---------- Auction ---------- */
-function dots(){
-  var a = S.auction;
-  return '<div class="dots" aria-label="Fortschritt">' + RULES.map(function(r, i){
-    var h = a.history[i]; var cls = h ? (h.correct ? "done-ok" : "done-ko") : (i === a.round ? "now" : "");
-    return '<i class="' + cls + '"></i>';
-  }).join("") + '</div>';
+/* ---------- Auction (Wett-App) ---------- */
+function rulesOrder(){
+  var idx = RULES.map(function(_, i){ return i; });
+  for (var i = idx.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = idx[i]; idx[i] = idx[j]; idx[j] = t; }
+  return idx;
 }
-function header(){
+function freshAuction(unlocked){
+  return {unlocked:!!unlocked, team:"", started:false, balance:START, order:rulesOrder(), pos:0, phase:"choose", pick:null, stake:null, custom:"", hint:false,
+    streak:0, best:0, correct:0, played:0, bigWin:0, rescue:false, history:[], done:false, last:null};
+}
+function curRule(){ var a = S.auction; return RULES[a.order[a.pos]]; }
+function isBoost(){ return (S.auction.pos + 1) % 5 === 0; }
+function streakBonus(){ var s = S.auction.streak; return s >= 5 ? 0.6 : s >= 3 ? 0.3 : 0; }
+function quote(){
+  var r = curRule(), q = r.q;
+  if (isBoost()) q = q * 1.5;
+  q = q + streakBonus();
+  if (S.auction.hint) q = q * 0.7;
+  return Math.max(1.1, Math.round(q * 10) / 10);
+}
+function qtxt(q){ return q.toFixed(1).replace(".", ","); }
+function level(n){ var cur = LEVELS[0], next = null; for (var i = 0; i < LEVELS.length; i++) { if (n >= LEVELS[i][0]) { cur = LEVELS[i]; next = LEVELS[i + 1] || null; } } return {cur:cur, next:next}; }
+function stakeValue(){
   var a = S.auction;
-  return '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><div class="bal"><span class="v" id="balV">' + eur(a.balance) + '</span><span class="k">' + (a.team ? esc(a.team) : 'Euer Konto') + '</span></div></div>';
+  if (a.stake === "all") return a.balance;
+  if (a.stake === "custom") { var v = parseInt(a.custom, 10); return isNaN(v) ? 0 : v; }
+  return a.stake || 0;
+}
+function stakeOk(){ var a = S.auction, v = stakeValue(); if (a.balance < 5) return true; return v >= 5 && v <= a.balance; }
+function header(){
+  var a = S.auction, L = level(a.correct);
+  return '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><div class="bal"><span class="v" id="balV">' + eur(a.balance) + '</span><span class="k">' + esc(a.team || 'Euer Konto') + '</span></div></div>' +
+    '<div class="stat"><span class="lv">' + esc(L.cur[1]) + '</span>' +
+    '<span class="bar"><i style="width:' + (L.next ? Math.round((a.correct - L.cur[0]) / (L.next[0] - L.cur[0]) * 100) : 100) + '%"></i></span>' +
+    '<span class="streak' + (a.streak >= 3 ? ' hot' : '') + '">🔥 ' + a.streak + '</span></div>';
 }
 function renderAuction(){
   var a = S.auction;
   if (!a.unlocked) return go("hub");
   if (!a.started) return renderSetup();
   if (a.done) return renderEnd();
-  if (a.phase === "locked") return renderLocked();
-  if (a.phase === "revealed") return renderReveal(false);
+  if (a.phase === "result") return renderReveal(false);
   renderChoose();
 }
 function bindHome(){ var h = document.getElementById("home"); if (h) h.onclick = function(){ go("hub"); }; }
@@ -334,12 +420,13 @@ function renderSetup(){
     '<div class="card" style="display:flex;flex-direction:column;gap:14px">' +
       '<p class="label">So geht\'s</p>' +
       '<ol class="golden" style="gap:10px">' +
-        '<li style="background:var(--paper)"><b class="n">1</b><span class="r">Ihr spielt zu zweit, mit 100 €.</span><span class="s">Ein Handy pro Tandem.</span></li>' +
-        '<li style="background:var(--paper)"><b class="n">2</b><span class="r">8 Regeln. Gut oder Falle?</span><span class="s">Tippt und setzt Geld: 10, 20, 50 € oder alles!</span></li>' +
-        '<li style="background:var(--paper)"><b class="n">3</b><span class="r">Richtig: Ihr gewinnt den Einsatz.</span><span class="s">Falsch: Das Geld ist weg.</span></li>' +
+        '<li style="background:var(--paper)"><b class="n">1</b><span class="r">Gute Regel oder Falle? Wettet!</span><span class="s">' + RULES.length + ' Regeln. Spielt, so lange die Zeit läuft.</span></li>' +
+        '<li style="background:var(--paper)"><b class="n">2</b><span class="r">Jede Regel hat eine Quote.</span><span class="s">Richtig: Einsatz × Quote. Falsch: Einsatz weg.</span></li>' +
+        '<li style="background:var(--paper)"><b class="n">3</b><span class="r">⭐ Hilfe auf Französisch</span><span class="s">Aber dann sinkt die Quote.</span></li>' +
+        '<li style="background:var(--paper)"><b class="n">4</b><span class="r">🔥 Serien und ⚡ Boosts</span><span class="s">3 richtig hintereinander: höhere Quote. Jede 5. Regel: Boost!</span></li>' +
       '</ol></div>' +
-    '<div class="step"><label class="label" for="team">Euer Team-Name</label><input id="team" maxlength="18" placeholder="z. B. Die Profis" style="height:58px;border-radius:999px;border:2px solid var(--ink);background:var(--card);padding:0 22px;font-weight:700;font-size:18px;width:100%" value="' + esc(S.auction.team) + '"></div>' +
-    '<div class="sticky-cta"><button class="btn orange" id="start">Los geht\'s' + ARROW + '</button></div>' +
+    '<div class="step"><label class="label" for="team">Euer Team-Name</label><input id="team" maxlength="18" placeholder="z. B. Die Profis" class="field" value="' + esc(S.auction.team) + '"></div>' +
+    '<div class="sticky-cta"><button class="btn orange" id="start">100 € · Los geht\'s' + ARROW + '</button></div>' +
     '</section>';
   bindHome();
   document.getElementById("start").onclick = function(){
@@ -347,106 +434,126 @@ function renderSetup(){
     S.auction.team = t || "Team Camille"; S.auction.started = true; save(); buzz(30); render(); window.scrollTo(0, 0);
   };
 }
-function stakeOptions(){
-  var bal = S.auction.balance;
-  return [10, 20, 50].map(function(v){ return {v:v, label:v + " €", dis:v > bal}; }).concat([{v:"all", label:"Alles!", dis:bal <= 0}]);
-}
-function stakeValue(){ var a = S.auction; if (a.balance <= 0) return 0; return a.stake === "all" ? a.balance : a.stake; }
 function renderChoose(){
   setTips("choose");
-  var a = S.auction, r = RULES[a.round], broke = a.balance <= 0;
-  var chips = stakeOptions().map(function(o){
-    return '<button class="chip' + (o.v === "all" ? " allin" : "") + '" data-s="' + o.v + '" aria-pressed="' + (String(a.stake) === String(o.v) ? "true" : "false") + '"' + (o.dis ? " disabled" : "") + '>' + o.label + '</button>';
-  }).join("");
-  var ready = a.pick !== null && (broke || a.stake !== null);
-  var ctaTxt = !a.pick ? "Gut oder Falle?" : (!broke && a.stake === null) ? "Wie viel setzt ihr?" : broke ? "Tipp abgeben" : eur(stakeValue()) + " setzen";
+  var a = S.auction, r = curRule(), q = quote(), broke = a.balance < 5;
+  var chips = [10, 25, 50, 100].map(function(v){ return '<button class="chip" data-s="' + v + '" aria-pressed="' + (a.stake === v) + '"' + (v > a.balance ? ' disabled' : '') + '>' + v + '</button>'; }).join("") +
+    '<button class="chip allin" data-s="all" aria-pressed="' + (a.stake === "all") + '"' + (a.balance < 5 ? ' disabled' : '') + '>Alles!</button>';
+  var sv = stakeValue(), ready = a.pick !== null && (broke || stakeOk());
+  var win = Math.round(sv * q);
+  var cta = !a.pick ? "Gute Regel oder Falle?" : broke ? "Tipp abgeben" : !stakeOk() ? (sv > a.balance ? "Zu viel! Max. " + eur(a.balance) : "Wählt euren Einsatz") : "Wette platzieren · " + eur(sv);
+  var badges = (isBoost() ? '<span class="badge boost">⚡ Quoten-Boost</span>' : '') + (streakBonus() ? '<span class="badge fire">🔥 Serien-Bonus +' + qtxt(streakBonus()) + '</span>' : '');
   app.innerHTML = '<section class="view">' + header() +
-    '<div class="row"><span class="pill">Regel ' + (a.round + 1) + ' von 8</span>' + dots() + '</div>' +
-    '<div class="rule"><span class="label">Regel ' + (a.round + 1) + '</span><p class="txt">' + esc(r.t) + '</p></div>' +
-    '<div class="step"><span class="label">1 · Euer Tipp</span><div class="picks">' +
-      '<button class="pick good" data-p="good" aria-pressed="' + (a.pick === "good") + '">' + UP + '<span class="d">Gute Regel</span><small>Das hilft im Tandem.</small></button>' +
-      '<button class="pick trap" data-p="trap" aria-pressed="' + (a.pick === "trap") + '">' + DOWN + '<span class="d">Falle!</span><small>Das ist keine gute Idee.</small></button>' +
-    '</div></div>' +
+    '<div class="rule"><div class="row"><span class="label">Regel ' + (a.pos + 1) + ' von ' + RULES.length + '</span>' +
+      '<button class="hintbtn" id="hint" aria-pressed="' + a.hint + '" aria-label="Hilfe auf Französisch">⭐ ' + (a.hint ? 'Hilfe' : 'Hilfe?') + '</button></div>' +
+      (badges ? '<div class="badges">' + badges + '</div>' : '') +
+      '<p class="txt">' + esc(r.t) + '</p>' +
+      (a.hint ? '<div class="hintbox" lang="fr"><b>Indice</b> ' + esc(r.h) + '<span>Quote × 0,7</span></div>' : '') +
+    '</div>' +
+    '<div class="picks">' +
+      '<button class="pick good" data-p="good" aria-pressed="' + (a.pick === "good") + '">' + UP + '<span class="d">Gute Regel</span><span class="odd">' + qtxt(q) + '</span></button>' +
+      '<button class="pick trap" data-p="trap" aria-pressed="' + (a.pick === "trap") + '">' + DOWN + '<span class="d">Falle!</span><span class="odd">' + qtxt(q) + '</span></button>' +
+    '</div>' +
     (broke
-      ? '<div class="broke"><b>Pleite!</b> Ihr habt kein Geld mehr. Spielt trotzdem weiter: Jeder richtige Tipp zählt für eure Ehre.</div>'
-      : '<div class="step"><span class="label">2 · Euer Einsatz</span><div class="chips">' + chips + '</div></div>') +
-    '<div class="sticky-cta"><button class="btn" id="lock"' + (ready ? "" : " disabled") + '>' + ctaTxt + '</button></div>' +
+      ? '<div class="broke"><b>Pleite!</b> Kein Geld mehr. Tippt trotzdem weiter: Jeder richtige Tipp zählt für Serie und Level.</div>'
+      : '<div class="slip"><div class="row"><span class="label">Wettschein</span><span class="label">Quote <b>' + qtxt(q) + '</b></span></div>' +
+        '<div class="chips">' + chips + '</div>' +
+        '<div class="custom"><button class="stp" id="minus" aria-label="Weniger">−</button><input id="cst" inputmode="numeric" placeholder="Eigener Einsatz" value="' + esc(a.stake === "custom" ? a.custom : "") + '" aria-label="Eigener Einsatz in Euro"><span class="eu">€</span><button class="stp" id="plus" aria-label="Mehr">+</button></div>' +
+        '<div class="row win"><span>Möglicher Gewinn</span><b id="winV">' + (sv ? eur(win) : '–') + '</b></div></div>') +
+    '<div class="sticky-cta"><button class="btn" id="place"' + (ready ? "" : " disabled") + '>' + cta + '</button></div>' +
     '</section>';
   bindHome();
-  Array.prototype.forEach.call(app.querySelectorAll(".pick"), function(el){ el.onclick = function(){ a.pick = el.getAttribute("data-p"); buzz(10); save(); renderChoose(); }; });
-  Array.prototype.forEach.call(app.querySelectorAll(".chip"), function(el){ el.onclick = function(){ var s = el.getAttribute("data-s"); a.stake = s === "all" ? "all" : +s; buzz(10); save(); renderChoose(); }; });
-  document.getElementById("lock").onclick = function(){ a.lockedStake = stakeValue(); a.phase = "locked"; buzz(40); save(); render(); window.scrollTo(0, 0); };
-}
-function renderLocked(){
-  setTips("locked");
-  var a = S.auction;
-  app.innerHTML = '<section class="view">' + header() +
-    '<div class="row"><span class="pill">Regel ' + (a.round + 1) + ' von 8</span>' + dots() + '</div>' +
-    '<div class="locked"><p class="d">Gesetzt!</p>' +
-      '<p style="font-size:19px;font-weight:700">' + (a.lockedStake ? eur(a.lockedStake) + ' auf ' : 'Euer Tipp: ') + (a.pick === "good" ? '„Gute Regel“' : '„Falle“') + '</p>' +
-      '<p style="font-size:15px;opacity:.8">„' + esc(RULES[a.round].t) + '“</p>' +
-      '<p class="pulse"><i></i>Schaut auf die Leinwand!</p></div>' +
-    '<p class="hint">Die Antwort kommt gleich auf die Leinwand. Erst dann: Aufdecken!</p>' +
-    '<div class="sticky-cta"><button class="btn orange" id="rev">Aufdecken</button></div>' +
-    '</section>';
-  bindHome();
-  document.getElementById("rev").onclick = function(){
-    var r = RULES[a.round], correct = (a.pick === "good") === r.good, st = a.lockedStake || 0, before = a.balance;
-    a.balance = Math.max(0, before + (correct ? st : -st));
-    a.history[a.round] = {pick:a.pick, stake:st, correct:correct, delta:a.balance - before};
-    a.phase = "revealed"; save(); buzz(correct ? [30,40,30] : [200]);
-    renderReveal(true, before);
+  document.getElementById("hint").onclick = function(){ if (!a.hint) { a.hint = true; buzz(10); save(); var y = window.scrollY; renderChoose(); window.scrollTo(0, y); } };
+  Array.prototype.forEach.call(app.querySelectorAll(".pick"), function(el){ el.onclick = function(){ a.pick = el.getAttribute("data-p"); buzz(10); save(); var y = window.scrollY; renderChoose(); window.scrollTo(0, y); }; });
+  Array.prototype.forEach.call(app.querySelectorAll(".chip"), function(el){ el.onclick = function(){ var s = el.getAttribute("data-s"); a.stake = s === "all" ? "all" : +s; a.custom = ""; buzz(10); save(); var y = window.scrollY; renderChoose(); window.scrollTo(0, y); }; });
+  var cst = document.getElementById("cst");
+  function setCustom(v){ a.stake = "custom"; a.custom = String(Math.max(0, Math.min(a.balance, v))); save(); var y = window.scrollY; renderChoose(); window.scrollTo(0, y); }
+  if (cst) {
+    cst.oninput = function(){ a.stake = "custom"; a.custom = cst.value.replace(/[^0-9]/g, "").slice(0, 6); save();
+      var v = stakeValue(), ok = stakeOk(), b = document.getElementById("place");
+      document.getElementById("winV").textContent = v ? eur(Math.round(v * quote())) : "–";
+      Array.prototype.forEach.call(app.querySelectorAll(".chip"), function(c){ c.setAttribute("aria-pressed", "false"); });
+      b.disabled = !(a.pick && ok); b.innerHTML = !a.pick ? "Gute Regel oder Falle?" : !ok ? (v > a.balance ? "Zu viel! Max. " + eur(a.balance) : "Mindestens 5 €") : "Wette platzieren · " + eur(v); };
+    cst.onblur = function(){ var y = window.scrollY; renderChoose(); window.scrollTo(0, y); };
+    document.getElementById("minus").onclick = function(){ buzz(8); setCustom(stakeValue() - 5); };
+    document.getElementById("plus").onclick = function(){ buzz(8); setCustom(stakeValue() + 5); };
+  }
+  document.getElementById("place").onclick = function(){
+    if (!(a.pick && (broke || stakeOk()))) return;
+    var r = curRule(), st = broke ? 0 : stakeValue(), qq = quote(), correct = (a.pick === "good") === r.good, before = a.balance;
+    var pay = correct ? Math.round(st * qq) : 0;
+    a.balance = before - st + pay;
+    a.played++; if (correct) { a.correct++; a.streak++; a.best = Math.max(a.best, a.streak); a.bigWin = Math.max(a.bigWin, pay - st); } else { a.streak = 0; }
+    a.last = {i:a.order[a.pos], pick:a.pick, stake:st, quote:qq, correct:correct, pay:pay, before:before, hint:a.hint, lvBefore:level(a.correct - (correct ? 1 : 0)).cur[1]};
+    a.history.push({i:a.order[a.pos], correct:correct});
+    a.phase = "result"; save(); buzz(correct ? [30,40,30] : [200]);
+    renderReveal(true);
   };
 }
 function animateBal(from, to){
   var el = document.getElementById("balV"); if (!el || from === to) return;
-  var t0 = null, d = 700;
-  function step(t){ if (!t0) t0 = t; var k = Math.min(1, (t - t0) / d); k = 1 - Math.pow(1 - k, 3); el.textContent = eur(Math.round((from + (to - from) * k) / 10) * 10); if (k < 1) requestAnimationFrame(step); else el.textContent = eur(to); }
+  var t0 = null, d = 800;
+  function step(t){ if (!t0) t0 = t; var k = Math.min(1, (t - t0) / d); k = 1 - Math.pow(1 - k, 3); el.textContent = eur(Math.round(from + (to - from) * k)); if (k < 1) requestAnimationFrame(step); else el.textContent = eur(to); }
   requestAnimationFrame(step);
 }
-function renderReveal(animate, before){
-  setTips(RULES[S.auction.round].good ? "revealGood" : "revealTrap");
-  var a = S.auction, r = RULES[a.round], h = a.history[a.round], last = a.round === RULES.length - 1;
-  var deltaTxt = h.stake ? (h.correct ? "Richtig! +" + eur(h.stake) : "Daneben! −" + eur(h.stake)) : (h.correct ? "Richtig getippt!" : "Daneben!");
+function renderReveal(animate){
+  var a = S.auction, h = a.last, r = RULES[h.i], last = a.pos >= RULES.length - 1;
+  setTips(r.good ? "revealGood" : "revealTrap");
+  var lvNow = level(a.correct).cur[1], up = h.correct && lvNow !== h.lvBefore;
+  var deltaTxt = h.stake ? (h.correct ? "Gewonnen! +" + eur(h.pay - h.stake) : "Verloren! −" + eur(h.stake)) : (h.correct ? "Richtig getippt!" : "Daneben!");
+  var broke = a.balance < 5;
   app.innerHTML = '<section class="view">' + header() +
-    '<div class="row"><span class="pill">Regel ' + (a.round + 1) + ' von 8</span>' + dots() + '</div>' +
-    '<div class="reveal ' + (r.good ? "good" : "trap") + '">' +
+    '<div class="reveal ' + (r.good ? "good" : "trap") + (h.correct ? " won" : " lost") + '">' +
       '<p class="stamp">' + (r.good ? "Gute Regel!" : "Falle!") + '</p>' +
       '<p style="font-size:15px;font-weight:700">„' + esc(r.t) + '“</p>' +
       '<p class="delta">' + deltaTxt + '</p>' +
+      (h.stake && h.correct ? '<p class="calc">' + eur(h.stake) + ' × ' + qtxt(h.quote) + ' = ' + eur(h.pay) + '</p>' : '') +
       '<p class="expl">' + esc(r.e) + '</p>' +
-      (r.rs ? '<div class="rs"><span class="label">Rettungssatz · alle zusammen!</span><p>„' + esc(r.rs) + '“</p></div>' : '') +
+      (r.rs ? '<div class="rs"><span class="label">Rettungssatz</span><p>„' + esc(r.rs) + '“</p></div>' : '') +
+      '<details class="frx"><summary>⭐ Auf Französisch</summary><p lang="fr">' + esc(r.h) + '</p></details>' +
     '</div>' +
-    '<div class="sticky-cta"><button class="btn" id="next">' + (last ? "Ergebnis ansehen" : "Nächste Regel") + ARROW + '</button></div>' +
+    (a.streak >= 3 ? '<div class="note hot">🔥 ' + a.streak + ' richtig hintereinander! Die nächste Quote steigt.</div>' : '') +
+    (up ? '<div class="note lvup">🏆 Neues Level: <b>' + esc(lvNow) + '</b></div>' : '') +
+    (broke && !a.rescue ? '<button class="btn lime" id="rescue">Rettungsschirm: +50 €</button>' : '') +
+    '<div class="sticky-cta"><div class="twobtn"><button class="btn ghost" id="stop">Ergebnis</button><button class="btn" id="next">' + (last ? "Fertig!" : "Nächste Regel") + ARROW + '</button></div></div>' +
     '</section>';
   bindHome();
-  if (animate) { document.getElementById("balV").textContent = eur(before); animateBal(before, a.balance); if (h.correct && h.stake >= 50) confetti(); }
+  if (animate) { document.getElementById("balV").textContent = eur(h.before); animateBal(h.before, a.balance); if (h.correct && h.pay - h.stake >= 50) confetti(); if (up) toast("🏆 Level " + lvNow + "!"); }
+  var rb = document.getElementById("rescue");
+  if (rb) rb.onclick = function(){ var b = a.balance; a.balance += 50; a.rescue = true; save(); buzz(40); renderReveal(false); animateBal(b, a.balance); toast("Rettungsschirm: +50 €. Nur einmal!"); };
   document.getElementById("next").onclick = function(){
-    if (last) { a.done = true; } else { a.round++; a.phase = "choose"; a.pick = null; a.stake = null; a.lockedStake = 0; }
+    if (last) { a.done = true; } else { a.pos++; a.phase = "choose"; a.pick = null; a.stake = null; a.custom = ""; a.hint = false; }
     save(); render(); window.scrollTo(0, 0); if (last) { buzz([60,40,60,40,160]); confetti(); }
   };
+  document.getElementById("stop").onclick = function(){ a.done = true; save(); render(); window.scrollTo(0, 0); buzz([60,40,160]); confetti(); };
 }
 function rank(b){
   if (b <= 0) return "Pleite! Aber jetzt kennt ihr die Regeln.";
   if (b < 100) return "Knapp daneben!";
-  if (b < 200) return "Solides Tandem!";
+  if (b < 250) return "Solides Tandem!";
   if (b < 1000) return "Tandem-Profis!";
   return "Tandem-Millionäre!";
 }
 function renderEnd(){
   setTips("end");
-  var a = S.auction, ok = a.history.filter(function(h){ return h && h.correct; }).length;
-  var hist = RULES.map(function(r, i){ var h = a.history[i]; return '<span class="' + (h && h.correct ? "ok" : "ko") + '" aria-label="Regel ' + (i + 1) + (h && h.correct ? ' richtig' : ' falsch') + '">' + (i + 1) + '</span>'; }).join("");
+  var a = S.auction, L = level(a.correct);
+  var hist = a.history.map(function(h, k){ return '<span class="' + (h.correct ? "ok" : "ko") + '">' + (k + 1) + '</span>'; }).join("");
   var gold = GOLDEN.map(function(g, i){ return '<li><b class="n">' + (i + 1) + '</b><span class="r">' + esc(g[0]) + '</span><span class="s">„' + esc(g[1]) + '“</span></li>'; }).join("");
   app.innerHTML = '<section class="view">' +
     '<div class="topbar"><button class="back" id="home">' + BACK + 'Start</button><span class="pill">Ergebnis</span></div>' +
-    '<div class="result"><span class="label" style="color:var(--paper);opacity:.75">' + esc(a.team) + ' · ' + ok + ' von 8 richtig</span>' +
+    '<div class="result"><span class="label" style="color:var(--paper);opacity:.75">' + esc(a.team) + ' · ' + a.correct + ' von ' + a.played + ' richtig</span>' +
       '<p class="big">' + eur(a.balance) + '</p><p class="title">' + rank(a.balance) + '</p></div>' +
-    '<div class="hist">' + hist + '</div>' +
+    '<div class="kpis"><div><b>' + esc(L.cur[1]) + '</b><span>Level</span></div><div><b>🔥 ' + a.best + '</b><span>Beste Serie</span></div><div><b>' + eur(a.bigWin) + '</b><span>Größter Gewinn</span></div></div>' +
+    (hist ? '<div class="hist">' + hist + '</div>' : '') +
     '<button class="btn orange" id="raise">Hoch damit!</button>' +
+    (a.pos < RULES.length - 1 ? '<button class="textbtn" id="more" style="align-self:center">Weiterspielen (noch ' + (RULES.length - a.pos - 1) + ' Regeln)</button>' : '') +
     '<p class="label" style="margin-top:6px">Die 5 goldenen Regeln</p><ol class="golden">' + gold + '</ol>' +
+    '<button class="textbtn" id="again" style="align-self:center">Neues Spiel (neue Reihenfolge)</button>' +
     '</section>';
   bindHome();
+  var m = document.getElementById("more");
+  if (m) m.onclick = function(){ a.done = false; if (a.phase === "result") { a.pos++; a.phase = "choose"; a.pick = null; a.stake = null; a.custom = ""; a.hint = false; } save(); render(); window.scrollTo(0, 0); };
+  document.getElementById("again").onclick = function(){ var t = a.team; S.auction = freshAuction(true); S.auction.team = t; save(); render(); window.scrollTo(0, 0); };
   document.getElementById("raise").onclick = function(){
     var o = document.createElement("div"); o.className = "overlay raise"; o.setAttribute("role", "dialog"); o.setAttribute("aria-label", "Ergebnis zeigen");
     o.innerHTML = '<span class="pill">' + esc(a.team) + '</span><p class="huge" style="font-size:clamp(72px,24vw,160px)">' + eur(a.balance) + '</p><p class="sub">Handy hoch! Alle sehen euer Ergebnis.</p><button class="btn" id="closeR">Zurück</button>';
@@ -548,35 +655,30 @@ var TIPS = {
   setup: {t:"Vor dem Start", sub:"Regel-Auktion", tFr:"Avant de commencer", subFr:"Regel-Auktion", tips:[
     ["Ein Handy pro Tandem. Setzt euch nebeneinander.", "Un téléphone par binôme, côte à côte."],
     ["Findet einen lustigen Team-Namen!", "Trouvez un nom d'équipe drôle."],
-    ["Sprecht zusammen Deutsch, auch beim Entscheiden.", "Décidez ensemble, en allemand."],
-    ["Drei von acht Regeln sind Fallen. Passt auf!", "Trois règles sur huit sont des pièges."]]},
-  choose: {t:"Gut oder Falle?", sub:"Entscheidet zu zweit", tFr:"Bonne règle ou piège ?", subFr:"Décidez à deux", tips:[
-    ["Lest die Regel laut, zu zweit.", "Lisez la règle à voix haute, à deux."],
-    ["Fragt euch: Hilft das beim Deutschlernen? Ja? Dann ist es eine gute Regel.", "Est-ce que ça aide à apprendre ? Si oui, c'est une bonne règle."],
-    ["Nicht sicher? Setzt wenig, zum Beispiel 10 €.", "Pas sûrs ? Misez peu."],
-    ["Ganz sicher? Dann: Alles!", "Sûrs de vous ? Tapis !"],
-    ["Ihr habt etwa 10 Sekunden. Dann sagt Felix: Stopp!", "Environ 10 secondes avant « Stopp! »."]],
-    phrases:[["Ich glaube, das ist eine gute Regel, weil …","Je crois que c'est une bonne règle, parce que …"],["Das ist eine Falle!","C'est un piège !"],["Ich bin nicht sicher.","Je ne suis pas sûr."],["Wie viel setzen wir? Zwanzig Euro?","On mise combien ? Vingt euros ?"],["Okay, wir setzen alles!","OK, on mise tout !"]]},
-  locked: {t:"Gesetzt!", sub:"Jetzt kommt die Antwort", tFr:"Mise validée !", subFr:"La réponse arrive", tips:[
-    ["Schaut auf die Leinwand: Dort kommt die Antwort.", "La réponse s'affiche sur l'écran de la classe."],
-    ["Erst dann: Aufdecken!", "Ensuite seulement : touchez « Aufdecken »."],
-    ["Euer Einsatz ist fest. Ändern geht nicht mehr.", "Votre mise est verrouillée."],
-    ["Bereitet euren Satz vor. Vielleicht fragt Augustin euch!", "Préparez votre phrase : Augustin peut vous interroger."]],
-    phrases:[["Wir haben 50 Euro gesetzt, weil …","Nous avons misé 50 euros, parce que …"],["Wir waren nicht sicher.","Nous n'étions pas sûrs."]]},
+    ["Ihr spielt in eurem Tempo: Regel lesen, wetten, nächste Regel.", "Vous jouez à votre rythme : lire la règle, parier, règle suivante."],
+    ["Es gibt " + RULES.length + " Regeln. Schafft ihr alle, bevor die Zeit vorbei ist?", "Il y a " + RULES.length + " règles. Arriverez-vous au bout avant la fin du chrono ?"],
+    ["Sprecht zusammen Deutsch, auch beim Entscheiden.", "Décidez ensemble, en allemand."]]},
+  choose: {t:"Gut oder Falle?", sub:"Euer Wettschein", tFr:"Bonne règle ou piège ?", subFr:"Votre ticket de pari", tips:[
+    ["Lest die Regel laut, zu zweit. Hilft das beim Deutschlernen? Dann ist es eine gute Regel.", "Lisez la règle à voix haute. Est-ce que ça aide à apprendre ? Alors c'est une bonne règle."],
+    ["Die Quote zeigt euren Gewinn: 50 € × 2,0 = 100 €.", "La cote indique votre gain : 50 € × 2,0 = 100 €."],
+    ["⭐ Hilfe: Die Regel kommt auf Französisch. Aber die Quote sinkt (× 0,7).", "⭐ Aide : la règle s'affiche en français. Mais la cote baisse (× 0,7)."],
+    ["Eigener Einsatz: Tippt eine Zahl oder nutzt − und +. Minimum 5 €.", "Mise personnalisée : tapez un montant ou utilisez − et +. Minimum 5 €."],
+    ["🔥 Drei richtige Tipps hintereinander: Die Quote steigt. ⚡ Jede fünfte Regel: Boost!", "🔥 Trois bons paris d'affilée : la cote monte. ⚡ Une règle sur cinq : boost !"]],
+    phrases:[["Ich glaube, das ist eine gute Regel, weil …","Je crois que c'est une bonne règle, parce que …"],["Das ist eine Falle!","C'est un piège !"],["Ich bin nicht sicher. Nehmen wir die Hilfe?","Je ne suis pas sûr. On prend l'aide ?"],["Wie viel setzen wir? Zwanzig Euro?","On mise combien ? Vingt euros ?"],["Okay, wir setzen alles!","OK, on mise tout !"]]},
   revealGood: {t:"Gute Regel!", sub:"Merkt euch den Satz", tFr:"Bonne règle !", subFr:"Retenez la phrase", tips:[
-    ["Sprecht den Rettungssatz laut mit der Klasse.", "Répétez la phrase de secours avec la classe."],
+    ["Sprecht den Rettungssatz zusammen laut.", "Dites la phrase de secours à voix haute, ensemble."],
     ["Diesen Satz könnt ihr in eurem echten Tandem sagen.", "Cette phrase servira dans un vrai tandem."],
-    ["Augustin fragt vielleicht: „Wie viel habt ihr gesetzt? Warum?“", "Augustin peut vous demander combien et pourquoi."]],
-    phrases:[["Wir haben 20 Euro gesetzt, weil wir sicher waren.","Nous avons misé 20 euros parce que nous étions sûrs."],["Wir haben gewonnen!","Nous avons gagné !"]]},
+    ["Dann: „Nächste Regel“. Die Zeit läuft!", "Puis : « Nächste Regel ». Le chrono tourne !"]],
+    phrases:[["Wir haben gewonnen!","Nous avons gagné !"],["Wir haben 20 Euro gesetzt, weil wir sicher waren.","Nous avons misé 20 euros parce que nous étions sûrs."]]},
   revealTrap: {t:"Falle!", sub:"Das macht man besser nicht", tFr:"Piège !", subFr:"À éviter", tips:[
-    ["Hört gut zu: Warum ist das keine gute Idee?", "Écoutez pourquoi ce n'est pas une bonne idée."],
-    ["Geld verloren? Kein Problem: Die nächste Regel kommt!", "Argent perdu ? La prochaine règle arrive."],
-    ["Pleite? Ihr spielt trotzdem weiter, für die Ehre.", "À zéro ? Vous continuez pour l'honneur."]],
+    ["Lest die Erklärung: Warum ist das keine gute Idee?", "Lisez l'explication : pourquoi ce n'est pas une bonne idée ?"],
+    ["Geld verloren? Die nächste Regel kommt!", "Argent perdu ? La règle suivante arrive !"],
+    ["Pleite? Einmal gibt es den Rettungsschirm: +50 €.", "À zéro ? Une seule fois, le parachute : +50 €."]],
     phrases:[["Wir haben Geld verloren.","Nous avons perdu de l'argent."],["Das war eine Falle!","C'était un piège !"]]},
   end: {t:"Geschafft!", sub:"Und jetzt?", tFr:"Terminé !", subFr:"Et maintenant ?", tips:[
     ["Tippt auf „Hoch damit!“ und zeigt euer Ergebnis.", "Touchez « Hoch damit! » et montrez votre score."],
     ["Macht einen Screenshot der 5 goldenen Regeln.", "Faites une capture d'écran des 5 règles."],
-    ["Probiert ein echtes Tandem: Tandem, HelloTalk oder ConversationExchange.", "Essayez un vrai tandem avec ces plateformes."],
+    ["Zu Hause: Spielt weiter, bis ihr alle " + RULES.length + " Regeln kennt!", "À la maison : continuez jusqu'à connaître les " + RULES.length + " règles !"],
     ["Zum Schluss: Euer Tandem-Pass, auch hier in der App.", "Pour finir : votre Tandem-Pass, lui aussi dans l’app."]]}
 };
 var tipKey = "hub";
@@ -640,6 +742,4 @@ function openTips(){
 render();
 })();
 </script>
-
-</body>
-</html>
+</body></html>
